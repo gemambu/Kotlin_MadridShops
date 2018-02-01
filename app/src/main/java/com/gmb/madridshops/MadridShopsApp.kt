@@ -15,6 +15,8 @@ class MadridShopsApp : MultiDexApplication() {
 
         Log.d("App", "onCreate")
 
+        Log.d("App", BuildConfig.MADRID_SHOPS_SERVER_URL)
+
         val allShopsInteractor = GetAllShopsInteractorFakeImpl()
 
 //        allShopsInteractor.execute(
