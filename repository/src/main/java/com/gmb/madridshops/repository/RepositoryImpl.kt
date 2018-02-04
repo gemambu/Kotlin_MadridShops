@@ -1,18 +1,64 @@
 package com.gmb.madridshops.repository
 
 import android.content.Context
+import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.gmb.madridshops.repository.cache.Cache
 import com.gmb.madridshops.repository.cache.CacheImplementation
+import com.gmb.madridshops.repository.model.ShopEntity
+import com.gmb.madridshops.repository.model.ShopsResponseEntity
+import com.gmb.madridshops.repository.network.GetJsonManager
+import com.gmb.madridshops.repository.network.GetJsonManagerVolleyImpl
+import com.gmb.madridshops.repository.network.json.JsonEntitiesParser
 import java.lang.ref.WeakReference
 
-class RepositoryImplementation(context: Context): Repository {
+class RepositoryImplementation(context: Context) : Repository {
 
-    val weakContext = WeakReference<Context>(context)
+    private val weakContext = WeakReference<Context>(context)
+    private val cache: Cache = CacheImplementation(weakContext.get()!!)
 
-    override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
-        val cache: Cache = CacheImplementation(weakContext.get()!!)
+    override fun getAllShops(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
 
-        cache.deleteAllShops(success, error)
+        // Read all shops from cache
+        cache.getAllShops(
+                success = {
+                    // if there are shops in the cache, return them
+                    success(it)
+                }, error = {
+            // if no shops in cache --> network
+            populateCache(success, error)
+        })
+
     }
+
+    private fun populateCache(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+        // perform network request
+
+        val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
+        jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
+            override fun successCompletion(e: String) {
+                val parser = JsonEntitiesParser()
+                var responseEntity: ShopsResponseEntity
+                try {
+                    responseEntity = parser.parse<ShopsResponseEntity>(e)
+                } catch (e: InvalidFormatException) {
+                    error("Error parsing")
+                    return
+                }
+                // store result in cache
+                cache.saveAllShops(responseEntity.result, success = {
+                    success(responseEntity.result)
+                }, error = {
+                    error("Something happened on the way to heaven!")
+                })
+            }
+        }, error = object: ErrorCompletion {
+            override fun errorCompletion(errorMessage: String) {
+            }
+        })
+    }
+
+
+    override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) = cache.deleteAllShops(success, error)
+
 
 }

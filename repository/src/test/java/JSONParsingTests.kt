@@ -27,6 +27,20 @@ class JSONParsingTests {
 
     @Test
     @Throws(Exception::class)
+    fun given_valid_string_containing_json_it_parse_correctly_shop_wrong_latitude() {
+        val shopsJson = ReadJsonFile().loadJSONFromAsset("shopWrong.json")
+        assertTrue(false == shopsJson!!.isEmpty())
+
+        val parser = JsonEntitiesParser()
+        val shop = parser.parse<ShopEntity>(shopsJson)
+
+        assertNotNull(shop)
+        assertEquals("Cortefiel - Preciados", shop.name)
+
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun given_valid_string_containing_json_it_parse_correctly_shops() {
         val shopsJson = ReadJsonFile().loadJSONFromAsset("shops.json")
         assertTrue(false == shopsJson!!.isEmpty())

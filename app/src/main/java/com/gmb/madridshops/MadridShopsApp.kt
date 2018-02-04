@@ -2,8 +2,11 @@ package com.gmb.madridshops
 
 import android.support.multidex.MultiDexApplication
 import android.util.Log
+import com.gmb.madridshops.domain.interactor.ErrorCompletion
+import com.gmb.madridshops.domain.interactor.SuccessCompletion
 import com.gmb.madridshops.domain.interactor.deleteallshops.DeleteAllShopsImpl
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorFakeImpl
+import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
 import com.gmb.madridshops.domain.model.Shops
 
 class MadridShopsApp : MultiDexApplication() {
@@ -15,34 +18,37 @@ class MadridShopsApp : MultiDexApplication() {
 
         Log.d("App", "onCreate")
 
-        Log.d("App", BuildConfig.MADRID_SHOPS_SERVER_URL)
-
-        val allShopsInteractor = GetAllShopsInteractorFakeImpl()
-
-//        allShopsInteractor.execute(
-//                success = object : SuccessCompletion<Shops> {
-//                    override fun successCompletion(shops: Shops) {
-//                        Log.d("Shops", "count: " + shops.count())
-//                    }
-//
-//                }, error = object : ErrorCompletion {
-//                    override fun errorCompletion(errorMessage: String) {
-//
-//                    }
-//        })
+        val allShopsInteractor = GetAllShopsInteractorImpl(this)
 
         allShopsInteractor.execute(
+                success = object : SuccessCompletion<Shops> {
+                    override fun successCompletion(shops: Shops) {
+                        Log.d("Shops", "count: " + shops.count())
+
+                        shops.shops.forEach {
+                            Log.d("Shop", it.name)
+                        }
+                    }
+
+                }, error = object : ErrorCompletion {
+                    override fun errorCompletion(errorMessage: String) {
+                        Log.d("ERROR", errorMessage)
+                    }
+        })
+
+    /*    allShopsInteractor.execute(
                 success = { shops: Shops ->
 
                 }, error = { msg: String ->
 
-                })
+                })*/
 
+        /*
         DeleteAllShopsImpl(this).execute(error = {
 
         }, success = {
             Log.d("Success", "success")
-        })
+        })*/
 
     }
 
