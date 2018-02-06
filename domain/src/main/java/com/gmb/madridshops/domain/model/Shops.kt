@@ -20,7 +20,7 @@ data class Shop(val id: Int, val name: String, val address: String){
 
     override fun all() = shops
 
-    override fun get(position: Int) = shops[position]
+    override operator fun get(position: Int) = shops[position]
 
 
     override fun add(element: Shop) {

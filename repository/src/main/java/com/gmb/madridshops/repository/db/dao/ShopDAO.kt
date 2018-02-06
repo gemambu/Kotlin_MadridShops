@@ -48,9 +48,7 @@ class ShopDAO(val dbHelper: DBHelper) : DAOPersistable<ShopEntity> {
 
         while (cursor.moveToNext()) {
             val entity = entityFromCursor(cursor)!!
-            if (entity != null) {
-                result.add(entity)
-            }
+            result.add(entity)
 
         }
 
