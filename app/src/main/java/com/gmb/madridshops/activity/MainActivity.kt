@@ -23,6 +23,7 @@ import com.gmb.madridshops.fragment.ListFragment
 import com.gmb.madridshops.router.Router
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -30,8 +31,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     var listFragment: ListFragment? = null
+    val DEFAULT_MADRID_LATIDUDE = 40.4167
+    val DEFAULT_MADRID_LONGITUDE = -3.70325
+
+    private var map: GoogleMap? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +72,8 @@ class MainActivity : AppCompatActivity() {
         mapFragment.getMapAsync({
             Log.d("SUCCESS", "HABEMUS MAPA")
 
-            centerMapInPosition(it, 40.416775, -3.703790)
+
+            centerMapInPosition(it, DEFAULT_MADRID_LATIDUDE, DEFAULT_MADRID_LONGITUDE)
             it.uiSettings.isRotateGesturesEnabled = false
             it.uiSettings.isZoomControlsEnabled = true
             showUserPosition(baseContext)
@@ -76,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun showUserPosition(context: Context){
+    private fun showUserPosition(context: Context){
         if(ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION)
@@ -88,9 +95,10 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+
     }
 
-    fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double){
+    private fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double){
         val coordinate = LatLng(latitude, longitude)
 
         val cameraPosition = CameraPosition.Builder()
@@ -101,7 +109,8 @@ class MainActivity : AppCompatActivity() {
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
-    private var map: GoogleMap? = null
+
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -116,7 +125,9 @@ class MainActivity : AppCompatActivity() {
     private fun addAllPins(shops: Shops){
         for (i in 0 until shops.count()){
             val shop = shops.get(i)
-            addPin(this.map!!,40.416775, -3.703790 ,shop.name)
+            val latitude = shop.latidude?.toDouble() ?: DEFAULT_MADRID_LATIDUDE
+            val longitude = shop.longitude?.toDouble() ?: DEFAULT_MADRID_LONGITUDE
+            addPin(this.map!!,latitude, longitude ,shop.name)
         }
     }
 

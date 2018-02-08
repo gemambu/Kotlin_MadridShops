@@ -11,9 +11,9 @@ import java.lang.ref.WeakReference
 class DeleteAllShopsImpl(context: Context): DeleteAllShops {
     val weakContext = WeakReference<Context>(context)
 
-    override fun execute(success: CodeClosure, error: ErrorClosure) {
+    override fun execute(successCompletion: CodeClosure, errorCompletion: ErrorClosure) {
         val repository = RepositoryImplementation(weakContext.get() !!)
-        repository.deleteAllShops(success, error)
+        repository.deleteAllShops(successCompletion, errorCompletion)
     }
 
 }

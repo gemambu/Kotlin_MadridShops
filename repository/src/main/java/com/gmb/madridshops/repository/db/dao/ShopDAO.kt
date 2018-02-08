@@ -3,6 +3,7 @@ package com.gmb.madridshops.repository.db.dao
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.gmb.madridshops.repository.db.DBConstants
 import com.gmb.madridshops.repository.db.DBHelper
 import com.gmb.madridshops.repository.model.ShopEntity
@@ -18,13 +19,15 @@ class ShopDAO(val dbHelper: DBHelper) : DAOPersistable<ShopEntity> {
 
         content.put(DBConstants.KEY_SHOP_ID_JSON, shopEntity.id)
         content.put(DBConstants.KEY_SHOP_NAME, shopEntity.name)
-        content.put(DBConstants.KEY_SHOP_DESCRIPTION, shopEntity.description)
+        content.put(DBConstants.KEY_SHOP_DESCRIPTION_EN, shopEntity.description_en)
+        content.put(DBConstants.KEY_SHOP_DESCRIPTION_ES, shopEntity.description_es)
         content.put(DBConstants.KEY_SHOP_LATITUDE, shopEntity.latitude)
         content.put(DBConstants.KEY_SHOP_LONGITUDE, shopEntity.longitude)
         content.put(DBConstants.KEY_SHOP_IMAGE_URL, shopEntity.image)
         content.put(DBConstants.KEY_SHOP_LOGO_IMAGE_URL, shopEntity.logo)
         content.put(DBConstants.KEY_SHOP_ADDRESS, shopEntity.address)
-        content.put(DBConstants.KEY_SHOP_OPENING_HOURS, shopEntity.openingHours)
+        content.put(DBConstants.KEY_SHOP_OPENING_HOURS_EN, shopEntity.openingHours_en)
+        content.put(DBConstants.KEY_SHOP_OPENING_HOURS_ES, shopEntity.openingHours_es)
 
         return content
     }
@@ -63,12 +66,14 @@ class ShopDAO(val dbHelper: DBHelper) : DAOPersistable<ShopEntity> {
         return ShopEntity(cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOP_DATABASE_ID)),
                 cursor.getLong(cursor.getColumnIndex(DBConstants.KEY_SHOP_ID_JSON)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_NAME)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_DESCRIPTION)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_DESCRIPTION_EN)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_DESCRIPTION_ES)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_LATITUDE)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_LONGITUDE)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_IMAGE_URL)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_LOGO_IMAGE_URL)),
-                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_OPENING_HOURS)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_OPENING_HOURS_EN)),
+                cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_OPENING_HOURS_ES)),
                 cursor.getString(cursor.getColumnIndex(DBConstants.KEY_SHOP_ADDRESS))
         )
     }

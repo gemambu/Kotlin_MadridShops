@@ -22,10 +22,10 @@ class MadridShopsApp : MultiDexApplication() {
 
         allShopsInteractor.execute(
                 success = object : SuccessCompletion<Shops> {
-                    override fun successCompletion(shops: Shops) {
-                        Log.d("Shops", "count: " + shops.count())
+                    override fun successCompletion(e: Shops) {
+                        Log.d("Shops", "count: " + e.count())
 
-                        shops.shops.forEach {
+                        e.shops.forEach {
                             Log.d("Shop", it.name)
                         }
                     }

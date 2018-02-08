@@ -5,12 +5,13 @@ import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
 import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.domain.model.Shops
+import com.gmb.madridshops.domain.util.Mapper
 import com.gmb.madridshops.repository.Repository
 import com.gmb.madridshops.repository.RepositoryImplementation
 import com.gmb.madridshops.repository.model.ShopEntity
 import java.lang.ref.WeakReference
 
-class GetAllShopsInteractorImpl(context: Context): GetAllShopsInteractor {
+class GetAllShopsInteractorImpl(context: Context) : GetAllShopsInteractor {
     private val weakContext = WeakReference<Context>(context)
     private val repository: Repository = RepositoryImplementation(weakContext.get()!!)
 
@@ -29,9 +30,8 @@ class GetAllShopsInteractorImpl(context: Context): GetAllShopsInteractor {
 
         val tempList = ArrayList<Shop>()
 
-        list.forEach{
-            var shopEntity = Shop(it.id.toInt(), it.name, it.address)
-            tempList.add(shopEntity)
+        list.forEach {
+            tempList.add(Mapper().map(it))
         }
 
         return Shops(tempList)

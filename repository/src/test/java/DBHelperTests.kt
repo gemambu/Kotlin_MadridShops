@@ -1,3 +1,4 @@
+import com.gmb.madridshops.repository.db.DBHelper
 import com.gmb.madridshops.repository.db.convert
 import org.junit.Test
 
@@ -28,4 +29,6 @@ class DBHelperTests {
     fun given_1_converts_into_true() {
         assertEquals(true, convert(1))
     }
+
+
 }

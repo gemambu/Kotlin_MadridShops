@@ -6,7 +6,17 @@ import java.util.ArrayList
 /**
  * Shop: Represents one shop
  */
-data class Shop(val id: Int, val name: String, val address: String){
+data class Shop(val id: Int,
+                val name: String,
+                val address: String,
+                val description_es: String,
+                val description_en: String,
+                val latidude: Float? = 0f,
+                val longitude: Float? = 0f,
+                val image: String = "",
+                val logo: String = "",
+                val openingHours_en: String = "",
+                val openingHours_es: String = ""){
     init{
         Shops(ArrayList<Shop>())
     }

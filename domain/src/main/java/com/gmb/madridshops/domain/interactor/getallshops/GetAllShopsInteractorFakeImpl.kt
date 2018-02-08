@@ -38,7 +38,7 @@ class GetAllShopsInteractorFakeImpl : GetAllShopsInteractor {
         var list = ArrayList<Shop>()
 
         for(i in 0..100) {
-            val shop = Shop(i, "Shop $i", "Address: $i")
+            val shop = Shop(i, "Shop $i", "Address: $i", "desc_es", "desc_en")
             list.add(shop)
         }
 
