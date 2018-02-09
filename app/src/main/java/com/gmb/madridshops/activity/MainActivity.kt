@@ -28,6 +28,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity(){
     val DEFAULT_MADRID_LONGITUDE = -3.70325
 
     private var map: GoogleMap? = null
+    private var list: Shops? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,15 +49,24 @@ class MainActivity : AppCompatActivity(){
 
         Log.d("App", "onCreate MainActivity")
 
-
         setupMap()
-        listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
+
+
+    }
+
+    private fun setupList() {
+        listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment?
+
+        listFragment?.setEntities(list!!.shops)
+
     }
 
     private fun setupMap() {
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
         getAllShopsInteractor.execute(object: SuccessCompletion<Shops>{
             override fun successCompletion(e: Shops) {
+                list = e
+                setupList()
                 initializeMap(e)
 
             }
@@ -76,14 +88,14 @@ class MainActivity : AppCompatActivity(){
             centerMapInPosition(it, DEFAULT_MADRID_LATIDUDE, DEFAULT_MADRID_LONGITUDE)
             it.uiSettings.isRotateGesturesEnabled = false
             it.uiSettings.isZoomControlsEnabled = true
-            showUserPosition(baseContext)
+            showUserPosition(baseContext, it)
             map = it
             addAllPins(shops)
         })
 
     }
 
-    private fun showUserPosition(context: Context){
+    private fun showUserPosition(context: Context, map: GoogleMap?){
         if(ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION)
@@ -94,6 +106,8 @@ class MainActivity : AppCompatActivity(){
                     10)
             return
         }
+
+        map?.isMyLocationEnabled = true
 
 
     }
@@ -110,8 +124,6 @@ class MainActivity : AppCompatActivity(){
     }
 
 
-
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 10){
@@ -125,7 +137,7 @@ class MainActivity : AppCompatActivity(){
     private fun addAllPins(shops: Shops){
         for (i in 0 until shops.count()){
             val shop = shops.get(i)
-            val latitude = shop.latidude?.toDouble() ?: DEFAULT_MADRID_LATIDUDE
+            val latitude = shop.latitude?.toDouble() ?: DEFAULT_MADRID_LATIDUDE
             val longitude = shop.longitude?.toDouble() ?: DEFAULT_MADRID_LONGITUDE
             addPin(this.map!!,latitude, longitude ,shop.name)
         }

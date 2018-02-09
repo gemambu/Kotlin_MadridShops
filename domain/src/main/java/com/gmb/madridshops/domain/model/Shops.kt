@@ -1,5 +1,6 @@
 package com.gmb.madridshops.domain.model
 
+import java.io.Serializable
 import java.util.ArrayList
 
 
@@ -11,12 +12,12 @@ data class Shop(val id: Int,
                 val address: String,
                 val description_es: String,
                 val description_en: String,
-                val latidude: Float? = 0f,
+                val latitude: Float? = 0f,
                 val longitude: Float? = 0f,
                 val image: String = "",
                 val logo: String = "",
                 val openingHours_en: String = "",
-                val openingHours_es: String = ""){
+                val openingHours_es: String = ""): Serializable {
     init{
         Shops(ArrayList<Shop>())
     }
