@@ -3,7 +3,6 @@ package com.gmb.madridshops.activity
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -11,29 +10,32 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
-import com.gmb.madridshops.Manifest
 import com.gmb.madridshops.R
+import com.gmb.madridshops.adapter.RecyclerViewAdapter
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractor
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
+import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.domain.model.Shops
 import com.gmb.madridshops.fragment.ListFragment
 import com.gmb.madridshops.router.Router
-import com.google.android.gms.maps.CameraUpdateFactory
+import com.gmb.madridshops.util.map.MapUtil
+import com.gmb.madridshops.util.map.model.ShopPin
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
+    override fun onEntityClicked(position: Int, entity: Shop, view: View) {
+
+    }
+
+
     var listFragment: ListFragment? = null
     val DEFAULT_MADRID_LATIDUDE = 40.4167
     val DEFAULT_MADRID_LONGITUDE = -3.70325
@@ -58,6 +60,7 @@ class MainActivity : AppCompatActivity(){
         listFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment?
 
         listFragment?.setEntities(list!!.shops)
+
 
     }
 
@@ -84,8 +87,7 @@ class MainActivity : AppCompatActivity(){
         mapFragment.getMapAsync({
             Log.d("SUCCESS", "HABEMUS MAPA")
 
-
-            centerMapInPosition(it, DEFAULT_MADRID_LATIDUDE, DEFAULT_MADRID_LONGITUDE)
+            MapUtil().centerMapInPosition(it, DEFAULT_MADRID_LATIDUDE, DEFAULT_MADRID_LONGITUDE)
             it.uiSettings.isRotateGesturesEnabled = false
             it.uiSettings.isZoomControlsEnabled = true
             showUserPosition(baseContext, it)
@@ -112,16 +114,6 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-    private fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double){
-        val coordinate = LatLng(latitude, longitude)
-
-        val cameraPosition = CameraPosition.Builder()
-                .target(coordinate)
-                .zoom(15f)
-                .build()
-
-        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-    }
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -135,12 +127,26 @@ class MainActivity : AppCompatActivity(){
     }
 
     private fun addAllPins(shops: Shops){
-        for (i in 0 until shops.count()){
-            val shop = shops.get(i)
-            val latitude = shop.latitude?.toDouble() ?: DEFAULT_MADRID_LATIDUDE
-            val longitude = shop.longitude?.toDouble() ?: DEFAULT_MADRID_LONGITUDE
-            addPin(this.map!!,latitude, longitude ,shop.name)
-        }
+
+        val shopPins = ShopPin.shopPinsFromShops(shops)
+
+        MapUtil().addPins(shopPins, map, this)
+
+        map?.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener { marker ->
+            if (marker.tag == null || marker.tag !is Shop) {
+                return@OnInfoWindowClickListener
+            }
+            val shop = marker.tag as Shop?
+            Log.d("APP", "Show detail for shop: ${shop?.name}")
+            //Router.navigateFromShopListActivityToShopDetailActivity(this@ShopListActivity, shop, 0)
+        })
+
+//        for (i in 0 until shops.count()){
+//            val shop = shops.get(i)
+//            val latitude = shop.latitude?.toDouble() ?: DEFAULT_MADRID_LATIDUDE
+//            val longitude = shop.longitude?.toDouble() ?: DEFAULT_MADRID_LONGITUDE
+//            addPin(this.map!!,latitude, longitude ,shop.name)
+//        }
     }
 
     private fun addPin(map: GoogleMap, latitude: Double, longitude: Double, title: String){
@@ -167,4 +173,5 @@ class MainActivity : AppCompatActivity(){
         }*/
         return true
     }
+
 }

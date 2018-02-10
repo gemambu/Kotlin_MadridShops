@@ -18,8 +18,8 @@ class Mapper() {
                                     entity.openingHours_en,
                                     entity.openingHours_es)
 
-    fun parseStringToFloat(data: String): Float?{
-        var coordinate: Float? = null
+    fun parseStringToFloat(data: String): Float{
+        var coordinate: Float = 0f
 
         val parsedString: String = data.replace(",", "").replace(" ", "")
 

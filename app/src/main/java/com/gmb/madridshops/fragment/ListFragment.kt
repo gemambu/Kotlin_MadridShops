@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.gmb.madridshops.fragment
 
 
@@ -26,7 +28,7 @@ class ListFragment : Fragment() {
     private lateinit var entityList: RecyclerView
     private lateinit var root: View
 
-    public fun setEntities(entities:  MutableList<Shop>?) {
+    fun setEntities(entities:  MutableList<Shop>?) {
         listData = entities
     }
 
@@ -73,5 +75,6 @@ class ListFragment : Fragment() {
         // a avisar de nada, lo ponemos a null
         onEntityClickListener = null
     }
+
 
 }
