@@ -24,17 +24,17 @@ class RepositoryImplementation(context: Context) : Repository {
                     // if there are shops in the cache, return them
                     success(it)
                 }, error = {
-            // if no shops in cache --> network
-            populateCache(success, error)
-        })
+                    // if no shops in cache --> network
+                    populateCache(success, error)
+                })
 
     }
 
     private fun populateCache(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
         // perform network request
 
-        val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
-        jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success =  object: SuccessCompletion<String> {
+        val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get()!!)
+        jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success = object : SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
                 var responseEntity: ShopsResponseEntity
@@ -51,7 +51,7 @@ class RepositoryImplementation(context: Context) : Repository {
                     error("Something happened on the way to heaven!")
                 })
             }
-        }, error = object: ErrorCompletion {
+        }, error = object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
             }
         })

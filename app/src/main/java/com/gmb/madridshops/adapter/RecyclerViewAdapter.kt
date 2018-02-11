@@ -11,7 +11,7 @@ import com.gmb.madridshops.domain.model.Shop
 import com.squareup.picasso.Picasso
 
 
-class RecyclerViewAdapter(private val listData: List<Shop>?, private val listener: OnEntityClickListener?) : RecyclerView.Adapter<RecyclerViewAdapter.EntityViewHolder>() {
+class RecyclerViewAdapter(private var listData: List<Shop>?, private val listener: OnEntityClickListener?) : RecyclerView.Adapter<RecyclerViewAdapter.EntityViewHolder>() {
 
 
     private var onEntityClickListener: OnEntityClickListener? = null
@@ -25,7 +25,7 @@ class RecyclerViewAdapter(private val listData: List<Shop>?, private val listene
     override fun onBindViewHolder(holder: EntityViewHolder?, position: Int) {
 
         if (listData != null) {
-            holder?.bindEntity(listData[position], position)
+            holder?.bindEntity(listData!![position], position)
         }
     }
 

@@ -1,17 +1,12 @@
 package com.gmb.madridshops.util.map
 
 import android.content.Context
-import com.gmb.madridshops.R
-import com.gmb.madridshops.R.id.img1
 import com.gmb.madridshops.domain.model.Shop
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.*
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_picasso.*
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import java.net.URL
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 
 class MapUtil {

@@ -25,9 +25,9 @@ class MadridShopsApp : MultiDexApplication() {
                     override fun successCompletion(e: Shops) {
                         Log.d("Shops", "count: " + e.count())
 
-                        e.shops.forEach {
+                       /* e.shops.forEach {
                             Log.d("Shop", it.name)
-                        }
+                        }*/
                     }
 
                 }, error = object : ErrorCompletion {
@@ -55,6 +55,5 @@ class MadridShopsApp : MultiDexApplication() {
     override fun onLowMemory() {
         super.onLowMemory()
 
-        //
     }
 }
