@@ -12,7 +12,7 @@ class Mapper() {
                                     entity.description_en,
                                     entity.description_es,
                                     parseStringToFloat(entity.latitude),
-                                    parseStringToFloat(entity.longitude),
+                                    parseStringToFloat(entity.longitude ?: "-3.56757"),
                                     entity.image,
                                     entity.logo,
                                     entity.openingHours_en,
@@ -24,7 +24,7 @@ class Mapper() {
         val parsedString: String = data.replace(",", "").replace(" ", "")
 
         try {
-            coordinate = parsedString.toFloat()
+            coordinate = if (parsedString.isNotEmpty()) parsedString.toFloat() else 0f
         } catch (e: Exception) {
             Log.d("PARSE ERROR", "Error parsing string to float: " + data)
         }

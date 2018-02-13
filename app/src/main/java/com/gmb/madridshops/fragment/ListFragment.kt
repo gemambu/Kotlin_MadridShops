@@ -9,12 +9,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.gmb.madridshops.R
 import com.gmb.madridshops.adapter.RecyclerViewAdapter
 import com.gmb.madridshops.domain.model.Shop
@@ -38,15 +36,14 @@ class ListFragment : Fragment() {
         //setListenerToAdapter(adapter!!)
     }
 
-   /* private fun setListenerToAdapter(adapter: RecyclerViewAdapter) {
-        adapter.onClickListener = View.OnClickListener { v: View? ->
-            val position = shopRecyclerView.getChildAdapterPosition(v)
-            val shop = listData?.get(position)
-
-            // Send order to navigate to activity container
-            onShowShopDetail?.showShopDetail(shop!!)
-        }
-    }*/
+    /* private fun setListenerToAdapter(adapter: RecyclerViewAdapter) {
+         adapter.onClickListener = View.OnClickListener { v: View? ->
+             val position = shopRecyclerView.getChildAdapterPosition(v)
+             val shop = listData?.get(position)
+             // Send order to navigate to activity container
+             onShowShopDetail?.showShopDetail(shop!!)
+         }
+     }*/
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

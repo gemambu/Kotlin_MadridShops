@@ -32,6 +32,7 @@ internal class CacheImplementation(context: Context) : Cache {
             try {
                 shops.forEach { ShopDAO(cacheDBHelper()).insert(it) }
 
+
                 DispatchOnMainThread(Runnable {
                     success()
                 })

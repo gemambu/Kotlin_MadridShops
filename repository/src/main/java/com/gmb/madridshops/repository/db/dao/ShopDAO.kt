@@ -17,12 +17,15 @@ class ShopDAO(val dbHelper: DBHelper) : DAOPersistable<ShopEntity> {
     fun contentValues(shopEntity: ShopEntity): ContentValues {
         val content = ContentValues()
 
+        val latitude = shopEntity.latitude ?: "333"
+        val longitude = shopEntity.longitude ?: "666"
+
         content.put(DBConstants.KEY_SHOP_ID_JSON, shopEntity.id)
         content.put(DBConstants.KEY_SHOP_NAME, shopEntity.name)
         content.put(DBConstants.KEY_SHOP_DESCRIPTION_EN, shopEntity.description_en)
         content.put(DBConstants.KEY_SHOP_DESCRIPTION_ES, shopEntity.description_es)
-        content.put(DBConstants.KEY_SHOP_LATITUDE, shopEntity.latitude)
-        content.put(DBConstants.KEY_SHOP_LONGITUDE, shopEntity.longitude)
+        content.put(DBConstants.KEY_SHOP_LATITUDE, latitude)
+        content.put(DBConstants.KEY_SHOP_LONGITUDE, longitude)
         content.put(DBConstants.KEY_SHOP_IMAGE_URL, shopEntity.image)
         content.put(DBConstants.KEY_SHOP_LOGO_IMAGE_URL, shopEntity.logo)
         content.put(DBConstants.KEY_SHOP_ADDRESS, shopEntity.address)
@@ -54,6 +57,7 @@ class ShopDAO(val dbHelper: DBHelper) : DAOPersistable<ShopEntity> {
             result.add(entity)
 
         }
+
 
         return result
     }

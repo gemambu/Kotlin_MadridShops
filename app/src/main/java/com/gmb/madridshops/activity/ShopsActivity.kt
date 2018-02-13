@@ -21,6 +21,7 @@ import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorIm
 import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.domain.model.Shops
 import com.gmb.madridshops.fragment.ListFragment
+import com.gmb.madridshops.router.Router
 import com.gmb.madridshops.util.map.MapUtil
 import com.gmb.madridshops.util.map.model.ShopPin
 import com.google.android.gms.maps.GoogleMap
@@ -29,9 +30,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
-    override fun onEntityClicked(position: Int, entity: Shop, view: View) {
-
-    }
 
     lateinit var containerListFragment: ListFragment
     val DEFAULT_MADRID_LATIDUDE = 40.4167
@@ -53,10 +51,7 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
 
     }
 
-    private fun setupList() {
-        containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
-        containerListFragment.setEntities(list!!.shops)
-    }
+
 
     private fun setupMap() {
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
@@ -74,6 +69,11 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
             }
 
         })
+    }
+
+    private fun setupList() {
+        containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
+        containerListFragment.setEntities(list!!.shops)
     }
 
     private fun initializeMap(shops: Shops) {
@@ -132,13 +132,9 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
             }
             val shop = marker.tag as Shop?
             Log.d("APP", "Show detail for shop: ${shop?.name}")
-            //Router.navigateFromShopListActivityToShopDetailActivity(this@ShopListActivity, shop, 0)
+            Router().navigateFromListActivityToDetailActivity(this, shop!!)
         })
 
-    }
-
-    private fun addPin(map: GoogleMap, latitude: Double, longitude: Double, title: String){
-        map.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).title(title))
     }
 
 
@@ -148,18 +144,25 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//
+//        //Router().navigateFromMainActivityToPicassoActivity(this)
+//
+//        /*return when (item.itemId) {
+//            R.id.action_settings -> true
+//            else -> super.onOptionsItemSelected(item)
+//        }*/
+//
+//        Router().navigateFromListActivityToDetailActivity(this, )
+//        return true
+//    }
 
-        //Router().navigateFromMainActivityToPicassoActivity(this)
-
-        /*return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }*/
-        return true
+    override fun onEntityClicked(position: Int, entity: Shop, view: View) {
+        Router().navigateFromListActivityToDetailActivity(this, entity)
     }
+
 
 }

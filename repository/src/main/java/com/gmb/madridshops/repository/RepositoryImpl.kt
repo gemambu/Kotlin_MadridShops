@@ -44,12 +44,15 @@ class RepositoryImplementation(context: Context) : Repository {
                     error("Error parsing")
                     return
                 }
-                // store result in cache
-                cache.saveAllShops(responseEntity.result, success = {
-                    success(responseEntity.result)
-                }, error = {
-                    error("Something happened on the way to heaven!")
-                })
+                cache.deleteAllShops(success = {
+                    // store result in cache
+                    cache.saveAllShops(responseEntity.result, success = {
+                        success(responseEntity.result)
+                    }, error = {
+                        error("Something happened on the way to heaven!")
+                    })
+                }, error = {error("something happend deleting all the info")})
+
             }
         }, error = object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
