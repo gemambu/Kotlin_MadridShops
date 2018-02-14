@@ -18,7 +18,7 @@ import com.gmb.madridshops.adapter.RecyclerViewAdapter
 import com.gmb.madridshops.domain.model.Shop
 
 
-class ListFragment : Fragment() {
+class EntityListFragment : Fragment() {
 
 
     private var listData: MutableList<Shop>? = null

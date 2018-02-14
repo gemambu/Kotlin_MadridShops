@@ -5,6 +5,7 @@ import com.gmb.madridshops.activity.EntityDetailActivity
 import com.gmb.madridshops.activity.MainActivity
 import com.gmb.madridshops.activity.ShopsActivity
 import com.gmb.madridshops.domain.model.Shop
+import com.gmb.madridshops.util.EXTRA_SELECTED_ENTITY
 
 class Router {
 
@@ -18,7 +19,7 @@ class Router {
 
     fun navigateFromListActivityToDetailActivity(listActivity: ShopsActivity, selectedItem: Shop) {
         val intent = Intent(listActivity, EntityDetailActivity::class.java)
-        intent.putExtra("EXTRA_SELECTED_ENTITY", selectedItem)
+        intent.putExtra(EXTRA_SELECTED_ENTITY, selectedItem)
         listActivity.startActivity(intent)
     }
 }

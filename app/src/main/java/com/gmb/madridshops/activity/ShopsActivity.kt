@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -20,20 +21,18 @@ import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractor
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
 import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.domain.model.Shops
-import com.gmb.madridshops.fragment.ListFragment
+import com.gmb.madridshops.fragment.EntityListFragment
 import com.gmb.madridshops.router.Router
+import com.gmb.madridshops.util.DEFAULT_MADRID_LATIDUDE
+import com.gmb.madridshops.util.DEFAULT_MADRID_LONGITUDE
 import com.gmb.madridshops.util.map.MapUtil
 import com.gmb.madridshops.util.map.model.ShopPin
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 
 class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
 
-    lateinit var containerListFragment: ListFragment
-    val DEFAULT_MADRID_LATIDUDE = 40.4167
-    val DEFAULT_MADRID_LONGITUDE = -3.70325
+    lateinit var containerListFragment: EntityListFragment
 
     private var map: GoogleMap? = null
     private var list: Shops? = null
@@ -42,11 +41,17 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_entity_list)
-        //setSupportActionBar(toolbar)
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
 
         Log.d("App", "onCreate ShopsActivity")
 
         setupMap()
+
+        supportActionBar?.title = "SHOPS"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
     }
@@ -72,7 +77,7 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
     }
 
     private fun setupList() {
-        containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as ListFragment
+        containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as EntityListFragment
         containerListFragment.setEntities(list!!.shops)
     }
 
@@ -144,21 +149,14 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
         return true
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//
-//        //Router().navigateFromMainActivityToPicassoActivity(this)
-//
-//        /*return when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }*/
-//
-//        Router().navigateFromListActivityToDetailActivity(this, )
-//        return true
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            // se ha pulsado la flecha de back
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onEntityClicked(position: Int, entity: Shop, view: View) {
         Router().navigateFromListActivityToDetailActivity(this, entity)
