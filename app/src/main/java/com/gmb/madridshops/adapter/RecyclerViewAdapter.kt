@@ -42,9 +42,7 @@ class RecyclerViewAdapter(private var listData: List<Shop>?, private val listene
 
             // actualizamos la vista (itemView, que es la tarjeta) con el modelo
             name.text = entity.name
-            //address.text = itemView.context.getString(R.string.dish_price, dish.price)
             address.text = entity.address
-            //logo.setImageResource(getDishPhoto(dish.photo))
             Picasso
                     .with(super.itemView.context)
                     .load(entity.logo)

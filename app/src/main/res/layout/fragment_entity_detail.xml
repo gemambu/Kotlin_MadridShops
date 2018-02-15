@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:textAlignment="center"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             tools:text="NAME" />
 
