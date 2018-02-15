@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.model.Shop
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_entity_detail.*
 
 
@@ -22,7 +23,13 @@ class EntityDetailFragment : Fragment() {
     }
 
     private fun loadEntityData() {
-        entity_detail_map.setImageResource(R.drawable.abc_btn_radio_to_on_mtrl_015)
+
+        val url = "https://maps.googleapis.com/maps/api/staticmap?center=4${entityDetail.latitude},${entityDetail.longitude}&zoom=17&size=320x220&scale=2&markers=%7Ccolor:0x9C7B14%7C${entityDetail.latitude},${entityDetail.longitude}"
+        Picasso.with(root.context)
+                .load(url)
+                .placeholder(R.drawable.google_maps)
+                .into(entity_detail_map)
+
         entity_detail_name.text = entityDetail.name.toUpperCase()
         entity_detail_desc.text = entityDetail.description_en
         entity_detail_hours.text = entityDetail.openingHours_en
