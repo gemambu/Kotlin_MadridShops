@@ -9,7 +9,7 @@ import com.gmb.madridshops.repository.RepositoryImplementation
 import java.lang.ref.WeakReference
 
 class DeleteAllShopsImpl(context: Context): DeleteAllShops {
-    val weakContext = WeakReference<Context>(context)
+    private val weakContext = WeakReference<Context>(context)
 
     override fun execute(successCompletion: CodeClosure, errorCompletion: ErrorClosure) {
         val repository = RepositoryImplementation(weakContext.get() !!)

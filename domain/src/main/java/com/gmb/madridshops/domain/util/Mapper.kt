@@ -4,7 +4,7 @@ import android.util.Log
 import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.repository.model.ShopEntity
 
-class Mapper() {
+class Mapper {
 
     fun map(entity: ShopEntity): Shop = Shop(entity.id.toInt(),
                                     entity.name,
@@ -12,14 +12,14 @@ class Mapper() {
                                     entity.description_en,
                                     entity.description_es,
                                     parseStringToFloat(entity.latitude),
-                                    parseStringToFloat(entity.longitude ?: "-3.56757"),
+                                    parseStringToFloat(entity.longitude),
                                     entity.image,
                                     entity.logo,
                                     entity.openingHours_en,
                                     entity.openingHours_es)
 
-    fun parseStringToFloat(data: String): Float{
-        var coordinate: Float = 0f
+    private fun parseStringToFloat(data: String): Float{
+        var coordinate = 0f
 
         val parsedString: String = data.replace(",", "").replace(" ", "")
 

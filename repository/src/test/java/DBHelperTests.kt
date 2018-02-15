@@ -1,9 +1,6 @@
-import com.gmb.madridshops.repository.db.DBHelper
 import com.gmb.madridshops.repository.db.convert
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-
-import org.junit.Assert.*
 
 class DBHelperTests {
     @Test

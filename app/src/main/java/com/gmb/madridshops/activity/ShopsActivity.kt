@@ -32,7 +32,7 @@ import com.google.android.gms.maps.SupportMapFragment
 
 class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
 
-    lateinit var containerListFragment: EntityListFragment
+    private lateinit var containerListFragment: EntityListFragment
 
     private var map: GoogleMap? = null
     private var list: Shops? = null
@@ -150,7 +150,7 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item?.itemId == android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             // se ha pulsado la flecha de back
             finish()
             return true

@@ -3,22 +3,21 @@ package com.gmb.madridshops.repository.db.dao
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.gmb.madridshops.repository.db.DBConstants
 import com.gmb.madridshops.repository.db.DBHelper
 import com.gmb.madridshops.repository.model.ShopEntity
 
 
-class ShopDAO(val dbHelper: DBHelper) : DAOPersistable<ShopEntity> {
+class ShopDAO(private val dbHelper: DBHelper) : DAOPersistable<ShopEntity> {
 
     private val dbReadOnlyConn: SQLiteDatabase = dbHelper.readableDatabase
     private val dbReadWriteOnlyConn: SQLiteDatabase = dbHelper.writableDatabase
 
-    fun contentValues(shopEntity: ShopEntity): ContentValues {
+    private fun contentValues(shopEntity: ShopEntity): ContentValues {
         val content = ContentValues()
 
-        val latitude = shopEntity.latitude ?: "333"
-        val longitude = shopEntity.longitude ?: "666"
+        val latitude = shopEntity.latitude
+        val longitude = shopEntity.longitude
 
         content.put(DBConstants.KEY_SHOP_ID_JSON, shopEntity.id)
         content.put(DBConstants.KEY_SHOP_NAME, shopEntity.name)

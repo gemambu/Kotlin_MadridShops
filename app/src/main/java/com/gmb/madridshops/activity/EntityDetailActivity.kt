@@ -11,7 +11,7 @@ import com.gmb.madridshops.util.EXTRA_SELECTED_ENTITY
 
 class EntityDetailActivity : AppCompatActivity() {
 
-    lateinit var containerListFragment: EntityDetailFragment
+    private lateinit var containerListFragment: EntityDetailFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

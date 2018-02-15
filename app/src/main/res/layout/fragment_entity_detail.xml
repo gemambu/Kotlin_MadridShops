@@ -15,27 +15,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@color/colorPrimaryDark"
+        android:contentDescription="Map with the address"
         tools:src="@drawable/googleg_standard_color_18"
         android:layout_weight="1"
+        android:layout_margin="8dp"
         />
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_margin="8dp"
         android:layout_weight="1">
 
         <TextView
+            android:id="@+id/entity_detail_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:text="NAME"
-            android:id="@+id/entity_detail_name" />
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="NAME" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:text="DESC"
+            android:maxLines="4"
             android:layout_weight="1"
             android:id="@+id/entity_detail_desc"
             />
@@ -44,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:text="HOURS"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:textAlignment="center"
             android:id="@+id/entity_detail_hours"
             />
 
@@ -52,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:text="ADDRESS"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:textAlignment="center"
             android:id="@+id/entity_detail_address"
             />
     </android.support.v7.widget.LinearLayoutCompat>

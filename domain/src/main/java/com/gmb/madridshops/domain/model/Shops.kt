@@ -19,7 +19,7 @@ data class Shop(val id: Int,
                 val openingHours_en: String = "",
                 val openingHours_es: String = ""): Serializable {
     init{
-        Shops(ArrayList<Shop>())
+        Shops(ArrayList())
     }
 }
 

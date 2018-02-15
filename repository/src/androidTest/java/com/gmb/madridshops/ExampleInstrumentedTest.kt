@@ -1,14 +1,11 @@
 package com.gmb.madridshops
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import android.support.test.InstrumentationRegistry
+import android.support.test.runner.AndroidJUnit4
 import com.gmb.madridshops.repository.db.buildHelper
 import com.gmb.madridshops.repository.db.dao.ShopDAO
-import com.gmb.madridshops.repository.model.ShopEntity
-import org.junit.Assert
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.Test
+import org.junit.runner.RunWith
 
 
 /**
@@ -20,8 +17,8 @@ import org.junit.runner.RunWith;
 class ExampleInstrumentedTest {
 
     // Context of the app under test.
-    val appContext = InstrumentationRegistry.getTargetContext()
-    val dbHelper = buildHelper(appContext, "MadridShops.sqlite", 1)
+    private val appContext = InstrumentationRegistry.getTargetContext()
+    private val dbHelper = buildHelper(appContext, "MadridShops.sqlite", 1)
 
     @Test
     fun given_valid_shopentity_it_gets_inserted_correctly() {

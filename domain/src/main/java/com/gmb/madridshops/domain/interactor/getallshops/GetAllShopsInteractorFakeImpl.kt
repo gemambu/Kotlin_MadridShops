@@ -9,7 +9,7 @@ import com.gmb.madridshops.domain.model.Shops
 
 class GetAllShopsInteractorFakeImpl : GetAllShopsInteractor {
     override fun execute(success: SuccessCompletion<Shops>, error: ErrorCompletion) {
-        var allOk = false
+        val allOk = false
 
         // connect to the repo
 
@@ -21,7 +21,7 @@ class GetAllShopsInteractorFakeImpl : GetAllShopsInteractor {
     }
 
     fun execute(success: SuccessClosure, error: ErrorClosure){
-        var allOk = false
+        val allOk = false
 
         // connect to the repo
 
@@ -33,17 +33,13 @@ class GetAllShopsInteractorFakeImpl : GetAllShopsInteractor {
         }
     }
 
-    fun createFakeShops(): Shops {
+    private fun createFakeShops(): Shops {
 
-        var list = ArrayList<Shop>()
+        val list = ArrayList<Shop>()
 
-        for(i in 0..100) {
-            val shop = Shop(i, "Shop $i", "Address: $i", "desc_es", "desc_en")
-            list.add(shop)
-        }
+        (0..100).mapTo(list) { Shop(it, "Shop $it", "Address: $it", "desc_es", "desc_en") }
 
-        var shops = Shops(list)
-        return shops
+        return Shops(list)
     }
 
 }

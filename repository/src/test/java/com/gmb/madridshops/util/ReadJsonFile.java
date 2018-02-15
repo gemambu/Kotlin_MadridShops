@@ -11,13 +11,13 @@ import java.lang.reflect.Method;
 
 public class ReadJsonFile {
     public String loadJSONFromAsset(String fileName) {
-        String json = null;
+        String json;
         try {
             InputStream is = null;
             if (ReflectionUtil.hasMethod(ReadJsonFile.class, "getAssets")) {
                 Method methodGetAssets = ReflectionUtil.getMethod(ReadJsonFile.class, "getAssets");
                 try {
-                    Object result = methodGetAssets.invoke(this, fileName);
+                    methodGetAssets.invoke(this, fileName);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 } catch (InvocationTargetException e) {
@@ -29,7 +29,7 @@ public class ReadJsonFile {
                 is = ReadJsonFile.class.getClassLoader().getResourceAsStream(fileName);
             }
 
-            int size = is.available();
+            int size = is != null ? is.available() : 0;
 
             byte[] buffer = new byte[size];
 

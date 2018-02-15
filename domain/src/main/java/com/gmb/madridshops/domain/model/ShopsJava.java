@@ -1,10 +1,7 @@
 package com.gmb.madridshops.domain.model;
 
-/**
- * Created by gmarb on 23/1/18.
- */
 
-public class ShopsJava {
+class ShopsJava {
 
     private int id;
     private String name;

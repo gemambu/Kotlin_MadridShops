@@ -4,8 +4,6 @@ import android.support.multidex.MultiDexApplication
 import android.util.Log
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
-import com.gmb.madridshops.domain.interactor.deleteallshops.DeleteAllShopsImpl
-import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorFakeImpl
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
 import com.gmb.madridshops.domain.model.Shops
 
@@ -48,8 +46,4 @@ class MadridShopsApp : MultiDexApplication() {
 
     }
 
-    override fun onLowMemory() {
-        super.onLowMemory()
-
-    }
 }

@@ -37,9 +37,9 @@ class RepositoryImplementation(context: Context) : Repository {
         jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success = object : SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
-                var responseEntity: ShopsResponseEntity
+                val responseEntity: ShopsResponseEntity
                 try {
-                    responseEntity = parser.parse<ShopsResponseEntity>(e)
+                    responseEntity = parser.parse(e)
                 } catch (e: InvalidFormatException) {
                     error("Error parsing")
                     return

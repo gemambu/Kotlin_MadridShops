@@ -19,7 +19,7 @@ import org.junit.runner.RunWith
 class VolleyTests {
 
     // Context of the app under test.
-    val appContext = InstrumentationRegistry.getTargetContext()
+    private val appContext = InstrumentationRegistry.getTargetContext()
 
 
     @Test

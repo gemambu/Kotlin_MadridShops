@@ -2,18 +2,12 @@ package com.gmb.madridshops.util;
 
 import java.lang.reflect.Method;
 
-/**
- * Created by dfreniche on 13/10/2017.
- */
 
-public class ReflectionUtil {
+class ReflectionUtil {
     public static boolean hasMethod(Class theClass, String methodName) {
         Method method = getMethod(theClass, methodName);
-        if (method != null) {
-            return true;
-        }
+        return method != null;
 
-        return false;
     }
 
     public static Method getMethod(Class theClass, String methodName) {

@@ -13,8 +13,8 @@ import java.lang.ref.WeakReference
 internal class GetJsonManagerVolleyImpl(context: Context): GetJsonManager {
 
     // hacemos referencia debil
-    var weakContext: WeakReference<Context> = WeakReference(context)
-    var requestQueue: RequestQueue? = null
+    private var weakContext: WeakReference<Context> = WeakReference(context)
+    private var requestQueue: RequestQueue? = null
 
 
     override fun execute(url: String, success: SuccessCompletion<String>, error: ErrorCompletion) {
@@ -34,7 +34,7 @@ internal class GetJsonManagerVolleyImpl(context: Context): GetJsonManager {
     }
 
     // Get request queue
-    fun requestQueue(): RequestQueue {
+    private fun requestQueue(): RequestQueue {
 
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(weakContext.get())

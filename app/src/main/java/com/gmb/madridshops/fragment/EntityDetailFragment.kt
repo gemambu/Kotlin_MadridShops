@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_entity_detail.*
 
 class EntityDetailFragment : Fragment() {
 
-    lateinit var entityDetail: Shop
+    private lateinit var entityDetail: Shop
 
     fun setEntity(entity:  Shop) {
         this.entityDetail = entity
@@ -23,7 +23,7 @@ class EntityDetailFragment : Fragment() {
 
     private fun loadEntityData() {
         entity_detail_map.setImageResource(R.drawable.abc_btn_radio_to_on_mtrl_015)
-        entity_detail_name.text = entityDetail.name
+        entity_detail_name.text = entityDetail.name.toUpperCase()
         entity_detail_desc.text = entityDetail.description_en
         entity_detail_hours.text = entityDetail.openingHours_en
         entity_detail_address.text = entityDetail.address

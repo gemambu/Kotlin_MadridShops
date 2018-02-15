@@ -11,14 +11,14 @@ import java.lang.ref.WeakReference
 
 internal class CacheImplementation(context: Context) : Cache {
 
-    val context = WeakReference<Context>(context)
+    private val context = WeakReference<Context>(context)
 
     override fun getAllShops(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
 
         Thread(Runnable {
             val shops = ShopDAO(cacheDBHelper()).query()
 
-            if (shops.size > 0 ){
+            if (shops.isNotEmpty()){
                 success(shops)
             } else {
                 error("No shops")
@@ -46,7 +46,7 @@ internal class CacheImplementation(context: Context) : Cache {
 
     override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            var successDeleting = ShopDAO(cacheDBHelper()).deleteAll()
+            val successDeleting = ShopDAO(cacheDBHelper()).deleteAll()
 
             DispatchOnMainThread(Runnable {
                 if (successDeleting) {

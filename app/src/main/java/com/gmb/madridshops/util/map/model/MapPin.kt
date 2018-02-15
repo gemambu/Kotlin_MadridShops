@@ -23,12 +23,7 @@ class ShopPin(override val relatedModelObject: Shop) : MapPinneable<Shop> {
 
         fun shopPinsFromShops(shops: Shops): List<MapPinneable<Shop>> {
             val shopList = shops.shops
-            val shopPinList = ArrayList<MapPinneable<Shop>>()
-
-            for (shop in shopList) {
-                val sp = ShopPin(shop)
-                shopPinList.add(sp)
-            }
+            val shopPinList = shopList.map { ShopPin(it) }
 
             return shopPinList
         }
