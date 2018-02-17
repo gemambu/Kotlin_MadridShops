@@ -5,6 +5,7 @@ import android.database.Cursor
 interface DAOReadOps<T> {
     fun query(id: Long): T
     fun query(): List<T>
+    fun query(type: String): List<T>
     fun queryCursor(id: Long): Cursor
 }
 

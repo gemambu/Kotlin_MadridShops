@@ -17,8 +17,8 @@ import com.gmb.madridshops.R
 import com.gmb.madridshops.adapter.RecyclerViewAdapter
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
-import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractor
-import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
+import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractor
+import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractorImpl
 import com.gmb.madridshops.domain.model.Entities
 import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.model.Shop
@@ -28,7 +28,6 @@ import com.gmb.madridshops.router.Router
 import com.gmb.madridshops.util.DEFAULT_MADRID_LATIDUDE
 import com.gmb.madridshops.util.DEFAULT_MADRID_LONGITUDE
 import com.gmb.madridshops.util.EXTRA_ENTITY_TYPE
-import com.gmb.madridshops.util.EXTRA_SELECTED_ENTITY
 import com.gmb.madridshops.util.map.MapUtil
 import com.gmb.madridshops.util.map.model.EntityPin
 import com.google.android.gms.maps.GoogleMap
@@ -54,16 +53,19 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         val intent = intent
         val entityType = intent.getSerializableExtra(EXTRA_ENTITY_TYPE) as EntityType
 
-        setupMap()
+        setupData()
 
         supportActionBar?.title = entityType.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
 
-    private fun setupMap() {
-        val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
-        getAllShopsInteractor.execute(object: SuccessCompletion<Entities>{
+    private fun setupData() {
+
+        val getAllShopsInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
+
+        getAllShopsInteractor.execute(EntityType.SHOP, object: SuccessCompletion<Entities>{
+
             override fun successCompletion(e: Entities) {
                 list = e
                 setupList()

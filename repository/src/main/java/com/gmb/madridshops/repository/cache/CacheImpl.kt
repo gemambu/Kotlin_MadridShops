@@ -12,46 +12,53 @@ import java.lang.ref.WeakReference
 internal class CacheImplementation(context: Context) : Cache {
 
     private val context = WeakReference<Context>(context)
+    private val dbHelper = cacheDBHelper()
 
-    override fun getAllShops(success: (shops: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllEntities(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
         Thread(Runnable {
-            val shops = EntityDAO(cacheDBHelper()).query()
+            val entityList = EntityDAO(dbHelper).query(type)
 
-            if (shops.isNotEmpty()){
-                success(shops)
+            if (entityList.isNotEmpty()){
+                dbHelper.close()
+                success(entityList)
             } else {
-                error("No shops")
+                dbHelper.close()
+                error("Error getting ${type} list")
             }
         }).run()
 
     }
 
-    override fun saveAllShops(shops: List<EntityData>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun saveAllEntities(type: String, entities: List<EntityData>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
             try {
-                shops.forEach { EntityDAO(cacheDBHelper()).insert(it, "shop") }
-
+                entities.forEach { EntityDAO(dbHelper).insert(it, type) }
 
                 DispatchOnMainThread(Runnable {
+                    dbHelper.close()
                     success()
                 })
             } catch (ex: Exception) {
                 DispatchOnMainThread(Runnable {
-                  error("Error inserting shops: " + ex.message.toString())
+                  error("Error inserting entities: " + ex.message.toString())
+                    dbHelper.close();
                 })
             }
         }).run()
     }
 
-    override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun deleteAllEntities(success: () -> Unit, error: (errorMessage: String) -> Unit) {
         Thread(Runnable {
-            val successDeleting = EntityDAO(cacheDBHelper()).deleteAll()
+            val successDeleting = EntityDAO(dbHelper).deleteAll()
 
             DispatchOnMainThread(Runnable {
                 if (successDeleting) {
+                    dbHelper.close()
                     success()
+
                 } else {
+                    dbHelper.close()
                     error("Error deleting")
                 }
             })

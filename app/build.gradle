@@ -48,7 +48,7 @@ dependencies {
     // see: https://developer.android.com/studio/build/multidex.html
     implementation 'com.android.support:multidex:1.0.2'
     // google maps. See https://developers.google.com/android/guides/setup
-    implementation 'com.google.android.gms:play-services-maps:11.4.0'
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
     // http://square.github.io/picasso/
     implementation 'com.squareup.picasso:picasso:2.5.2'
 

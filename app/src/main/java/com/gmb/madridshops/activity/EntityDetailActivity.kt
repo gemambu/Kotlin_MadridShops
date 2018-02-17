@@ -26,7 +26,7 @@ class EntityDetailActivity : AppCompatActivity() {
         containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_list_detail_fragment) as EntityDetailFragment
         containerListFragment.setEntity(entity)
 
-        supportActionBar?.title = entity.name
+        supportActionBar?.title = entity.name + "-" + entity.type
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

@@ -17,29 +17,32 @@ class RepositoryImplementation(context: Context) : Repository {
     private val weakContext = WeakReference<Context>(context)
     private val cache: Cache = CacheImplementation(weakContext.get()!!)
 
-    override fun getEntitiesByType(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
-    }
-
-    override fun getAllEntities(success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun getAllEntities(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
         // Read all shops from cache
-        cache.getAllShops(
+        cache.getAllEntities(type,
                 success = {
                     // if there are shops in the cache, return them
                     success(it)
                 }, error = {
                     // if no shops in cache --> network
-                    populateCache(success, error)
+                    populateCache(type, success, error)
                 })
 
     }
 
-    private fun populateCache(success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
+    private fun populateCache(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
         // perform network request
 
+        var url = ""
+
+        when(type) {
+            "SHOP" -> url = BuildConfig.MADRID_SHOPS_SERVER_URL
+            "ACTIVITY" -> url = BuildConfig.MADRID_SHOPS_SERVER_URL
+        }
         val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get()!!)
-        jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success = object : SuccessCompletion<String> {
+        jsonManager.execute(url, success = object : SuccessCompletion<String> {
             override fun successCompletion(e: String) {
                 val parser = JsonEntitiesParser()
                 val responseEntity: ResponseEntity
@@ -49,9 +52,9 @@ class RepositoryImplementation(context: Context) : Repository {
                     error("Error parsing")
                     return
                 }
-                cache.deleteAllShops(success = {
+                cache.deleteAllEntities(success = {
                     // store result in cache
-                    cache.saveAllShops(responseEntity.result, success = {
+                    cache.saveAllEntities(type, responseEntity.result, success = {
                         success(responseEntity.result)
                     }, error = {
                         error("Something happened on the way to heaven!")
@@ -68,6 +71,6 @@ class RepositoryImplementation(context: Context) : Repository {
     }
 
 
-    override fun deleteAllEntities(success: () -> Unit, error: (errorMessage: String) -> Unit) = cache.deleteAllShops(success, error)
+    override fun deleteAllEntities(success: () -> Unit, error: (errorMessage: String) -> Unit) = cache.deleteAllEntities(success, error)
 
 }

@@ -90,6 +90,27 @@ class EntityDAO(private val dbHelper: DBHelper) : DAOPersistable<EntityData> {
             "",
             DBConstants.KEY_ENTITY_DATABASE_ID)
 
+    override fun query(type: String): List<EntityData> {
+        val result = ArrayList<EntityData>()
+
+        val cursor = dbReadOnlyConn.query(DBConstants.TABLE_ENTITY,
+                DBConstants.ALL_COLUMNS,
+                DBConstants.KEY_ENTITY_TYPE + " = ?",
+                arrayOf(type),
+                "",
+                "",
+                DBConstants.KEY_ENTITY_DATABASE_ID)
+
+        while (cursor.moveToNext()) {
+            val entity = entityFromCursor(cursor)!!
+            result.add(entity)
+
+        }
+
+
+        return result
+    }
+
 
     override fun insert(element: EntityData, type: String): Long = dbReadWriteOnlyConn.insert(DBConstants.TABLE_ENTITY, null, contentValues(element, type))
 

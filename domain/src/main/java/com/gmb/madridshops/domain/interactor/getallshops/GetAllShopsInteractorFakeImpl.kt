@@ -9,8 +9,8 @@ import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.domain.util.EntityType
 
-class GetAllShopsInteractorFakeImpl : GetAllShopsInteractor {
-    override fun execute(success: SuccessCompletion<Entities>, error: ErrorCompletion) {
+class GetAllShopsInteractorFakeImpl : GetAllEntitiesInteractor {
+    override fun execute(entityType: EntityType, success: SuccessCompletion<Entities>, error: ErrorCompletion) {
         val allOk = false
 
         // connect to the repo

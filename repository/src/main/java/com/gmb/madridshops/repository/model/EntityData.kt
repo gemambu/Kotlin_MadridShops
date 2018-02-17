@@ -2,6 +2,7 @@ package com.gmb.madridshops.repository.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.io.Serializable
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class EntityData(
@@ -19,3 +20,8 @@ data class EntityData(
         val address: String,
         val type: String = ""
 )
+
+enum class EntityType(val type: Int): Serializable {
+    SHOP(1),
+    ACTIVITY(2)
+}

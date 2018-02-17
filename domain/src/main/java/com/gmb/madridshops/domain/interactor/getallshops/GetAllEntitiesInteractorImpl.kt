@@ -10,15 +10,16 @@ import com.gmb.madridshops.repository.Repository
 import com.gmb.madridshops.repository.RepositoryImplementation
 import java.lang.ref.WeakReference
 
-class GetAllShopsInteractorImpl(context: Context) : GetAllShopsInteractor {
+class GetAllEntitiesInteractorImpl(context: Context) : GetAllEntitiesInteractor {
     private val weakContext = WeakReference<Context>(context)
     private val repository: Repository = RepositoryImplementation(weakContext.get()!!)
 
-    override fun execute(success: SuccessCompletion<Entities>, error: ErrorCompletion) {
 
-        repository.getAllEntities(success = {
-            val shops: Entities = Mapper().entitiesMapper(it, EntityType.SHOP)
-            success.successCompletion(shops)
+    override fun execute(entityType: EntityType, success: SuccessCompletion<Entities>, error: ErrorCompletion) {
+
+        repository.getAllEntities( entityType.name, success = {
+            val entities: Entities = Mapper().entitiesMapper(it, entityType)
+            success.successCompletion(entities)
         }, error = {
             error(it)
         })

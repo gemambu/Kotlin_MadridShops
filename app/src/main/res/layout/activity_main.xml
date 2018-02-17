@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    android:background="@drawable/background_madrid_shops">
 
     <include layout="@layout/toolbar"
         android:layout_width="match_parent"
@@ -34,19 +35,40 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
+           <!-- <ImageButton
+                android:id="@+id/main_activity_shops_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="90dp"
+                android:minHeight="90dp"
+                android:maxWidth="90dp"
+                android:maxHeight="90dp"
+                android:layout_weight="1"
+                android:src="@drawable/show_shops_btn"
+                android:text="@string/main_shops_bttn" />
+            <ImageButton
+                android:id="@+id/main_activity_activities_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/show_activities_btn"
+                android:text="@string/main_activities_bttn"/>-->
+
             <Button
                 android:id="@+id/main_activity_shops_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Shops"
+                android:drawableLeft="@drawable/show_shops_btn"
+                android:text="@string/main_shops_bttn"
                 />
             <Button
                 android:id="@+id/main_activity_activities_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/show_activities_btn"
                 android:layout_weight="1"
-                android:text="Activities"/>
+                android:text="@string/main_activities_bttn"/>
         </LinearLayout>
     </ScrollView>
 

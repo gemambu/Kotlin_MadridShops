@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@color/colorPrimaryDark"
-        android:contentDescription="Map with the address"
+        android:contentDescription="@string/detail_entity_map_desc"
         tools:src="@drawable/googleg_standard_color_18"
         android:layout_weight="1"
         android:layout_margin="8dp"

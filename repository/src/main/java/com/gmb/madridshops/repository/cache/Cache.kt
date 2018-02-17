@@ -4,8 +4,8 @@ import com.gmb.madridshops.repository.model.EntityData
 
 internal interface Cache {
 
-    fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit)
-    fun getAllShops(success: (shops: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit)
-    fun saveAllShops(shops: List<EntityData>, success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun deleteAllEntities(success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun getAllEntities(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit)
+    fun saveAllEntities(type: String, entities: List<EntityData>, success: () -> Unit, error: (errorMessage: String) -> Unit)
 
 }
