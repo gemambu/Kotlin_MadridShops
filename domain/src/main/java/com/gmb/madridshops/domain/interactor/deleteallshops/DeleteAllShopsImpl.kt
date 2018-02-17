@@ -13,7 +13,7 @@ class DeleteAllShopsImpl(context: Context): DeleteAllShops {
 
     override fun execute(successCompletion: CodeClosure, errorCompletion: ErrorClosure) {
         val repository = RepositoryImplementation(weakContext.get() !!)
-        repository.deleteAllShops(successCompletion, errorCompletion)
+        repository.deleteAllEntities(successCompletion, errorCompletion)
     }
 
 }

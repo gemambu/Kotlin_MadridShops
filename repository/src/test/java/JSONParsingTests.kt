@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
-import com.gmb.madridshops.repository.model.ShopEntity
-import com.gmb.madridshops.repository.model.ShopsResponseEntity
+import com.gmb.madridshops.repository.model.EntityData
+import com.gmb.madridshops.repository.model.ResponseEntity
 import com.gmb.madridshops.repository.network.json.JsonEntitiesParser
 import com.gmb.madridshops.util.ReadJsonFile
 import org.junit.Assert.*
@@ -16,7 +16,7 @@ class JSONParsingTests {
         assertTrue(!shopsJson!!.isEmpty())
 
         val parser = JsonEntitiesParser()
-        val shop = parser.parse<ShopEntity>(shopsJson)
+        val shop = parser.parse<EntityData>(shopsJson)
 
         assertNotNull(shop)
         assertEquals("Cortefiel - Preciados", shop.name)
@@ -30,11 +30,11 @@ class JSONParsingTests {
         assertTrue(!shopsJson!!.isEmpty())
 
         val parser = JsonEntitiesParser()
-        var shop: ShopEntity
+        var shop: EntityData
         try {
-            shop = parser.parse<ShopEntity>(shopsJson)
+            shop = parser.parse<EntityData>(shopsJson)
         } catch (e: InvalidFormatException) {
-            shop = ShopEntity(1,1,"Parsing failed","", "10", "11", "", "", "", "", "", "")
+            shop = EntityData(1,1,"Parsing failed","", "10", "11", "", "", "", "", "", "", "")
         }
         assertNotNull(shop)
        // assertEquals("Parsing failed", shop.name)
@@ -48,7 +48,7 @@ class JSONParsingTests {
         assertTrue(!shopsJson!!.isEmpty())
 
         val parser = JsonEntitiesParser()
-        val shop = parser.parse<ShopsResponseEntity>(shopsJson)
+        val shop = parser.parse<ResponseEntity>(shopsJson)
 
         assertNotNull(shop)
         assertEquals("Cortefiel - Preciados", shop.result[0].name)

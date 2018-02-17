@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.gmb.madridshops.R
+import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.model.Shop
 import com.squareup.picasso.Picasso
 
 
-class RecyclerViewAdapter(private var listData: List<Shop>?, private val listener: OnEntityClickListener?) : RecyclerView.Adapter<RecyclerViewAdapter.EntityViewHolder>() {
+class RecyclerViewAdapter(private var listData: List<Entity>?, private val listener: OnEntityClickListener?) : RecyclerView.Adapter<RecyclerViewAdapter.EntityViewHolder>() {
 
 
     private var onEntityClickListener: OnEntityClickListener? = null
@@ -38,7 +39,7 @@ class RecyclerViewAdapter(private var listData: List<Shop>?, private val listene
         private val logo = itemView.findViewById<ImageView>(R.id.logo)
 
 
-        fun bindEntity(entity: Shop, position: Int) {
+        fun bindEntity(entity: Entity, position: Int) {
 
             // actualizamos la vista (itemView, que es la tarjeta) con el modelo
             name.text = entity.name
@@ -59,6 +60,6 @@ class RecyclerViewAdapter(private var listData: List<Shop>?, private val listene
 
 
     interface OnEntityClickListener {
-        fun onEntityClicked(position: Int, entity: Shop, view: View)
+        fun onEntityClicked(position: Int, entity: Entity, view: View)
     }
 }

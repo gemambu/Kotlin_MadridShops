@@ -1,6 +1,7 @@
 package com.gmb.madridshops.util.map
 
 import android.content.Context
+import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.model.Shop
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,7 +24,7 @@ class MapUtil {
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
-    fun addPins(mapPinnables: List<MapPinneable<Shop>>?, googleMap: GoogleMap?, context: Context?) {
+    fun addPins(mapPinnables: List<MapPinneable<Entity>>?, googleMap: GoogleMap?, context: Context?) {
         if (mapPinnables == null || googleMap == null || context == null) {
             return
         }

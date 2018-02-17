@@ -9,7 +9,7 @@ interface DAOReadOps<T> {
 }
 
 interface DAOWirteOps<T> {
-    fun insert(element: T): Long
+    fun insert(element: T, type: String): Long
     fun update(id: Long, element: T): Long
 
     /**

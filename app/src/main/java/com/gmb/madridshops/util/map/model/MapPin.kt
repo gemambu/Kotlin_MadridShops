@@ -1,11 +1,11 @@
 package com.gmb.madridshops.util.map.model
 
+import com.gmb.madridshops.domain.model.Entities
+import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.model.Shop
-import com.gmb.madridshops.domain.model.Shops
 import com.gmb.madridshops.util.map.MapPinneable
-import java.util.ArrayList
 
-class ShopPin(override val relatedModelObject: Shop) : MapPinneable<Shop> {
+class EntityPin(override val relatedModelObject: Entity) : MapPinneable<Entity> {
 
     override val latitude: Float
         get() = relatedModelObject.latitude
@@ -21,11 +21,11 @@ class ShopPin(override val relatedModelObject: Shop) : MapPinneable<Shop> {
 
     companion object {
 
-        fun shopPinsFromShops(shops: Shops): List<MapPinneable<Shop>> {
-            val shopList = shops.shops
-            val shopPinList = shopList.map { ShopPin(it) }
+        fun entityPins(entities: Entities): List<MapPinneable<Entity>> {
+            val entityList = entities.entities
+            val entityPinList = entityList.map { EntityPin(it) }
 
-            return shopPinList
+            return entityPinList
         }
     }
 }

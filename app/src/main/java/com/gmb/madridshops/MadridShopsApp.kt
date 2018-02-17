@@ -5,7 +5,7 @@ import android.util.Log
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
-import com.gmb.madridshops.domain.model.Shops
+import com.gmb.madridshops.domain.model.Entities
 
 class MadridShopsApp : MultiDexApplication() {
 
@@ -19,8 +19,8 @@ class MadridShopsApp : MultiDexApplication() {
         val allShopsInteractor = GetAllShopsInteractorImpl(this)
 
         allShopsInteractor.execute(
-                success = object : SuccessCompletion<Shops> {
-                    override fun successCompletion(e: Shops) {
+                success = object : SuccessCompletion<Entities> {
+                    override fun successCompletion(e: Entities) {
                         Log.d("Shops", "count: " + e.count())
                     }
 
@@ -31,7 +31,7 @@ class MadridShopsApp : MultiDexApplication() {
         })
 
     /*    allShopsInteractor.execute(
-                success = { shops: Shops ->
+                success = { entities: Shops ->
 
                 }, error = { msg: String ->
 

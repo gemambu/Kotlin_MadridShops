@@ -15,19 +15,19 @@ import android.view.View
 import android.view.ViewGroup
 import com.gmb.madridshops.R
 import com.gmb.madridshops.adapter.RecyclerViewAdapter
-import com.gmb.madridshops.domain.model.Shop
+import com.gmb.madridshops.domain.model.Entity
 
 
 class EntityListFragment : Fragment() {
 
 
-    private var listData: MutableList<Shop>? = null
+    private var listData: MutableList<Entity>? = null
     private var onEntityClickListener: RecyclerViewAdapter.OnEntityClickListener? = null
     private lateinit var entityListRecyclerView: RecyclerView
     private var adapter: RecyclerViewAdapter? = null
     private lateinit var root: View
 
-    fun setEntities(entities:  MutableList<Shop>) {
+    fun setEntities(entities:  MutableList<Entity>) {
         this.listData = entities
 
         adapter = RecyclerViewAdapter(listData, onEntityClickListener)
@@ -65,6 +65,7 @@ class EntityListFragment : Fragment() {
         commonOnAttach(context)
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         commonOnAttach(activity)

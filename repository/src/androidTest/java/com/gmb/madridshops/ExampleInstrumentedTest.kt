@@ -3,7 +3,7 @@ package com.gmb.madridshops
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.gmb.madridshops.repository.db.buildHelper
-import com.gmb.madridshops.repository.db.dao.ShopDAO
+import com.gmb.madridshops.repository.db.dao.EntityDAO
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -28,7 +28,7 @@ class ExampleInstrumentedTest {
          //       1.0f, 2.0f, "", "", "", "my address")
 
 
-        val shopEntityDAO = ShopDAO(dbHelper)
+        // val shopEntityDAO = EntityDAO(dbHelper)
 
         //val id = shopEntityDAO.insert(shop)
 

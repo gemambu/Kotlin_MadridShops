@@ -19,23 +19,27 @@ import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractor
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
+import com.gmb.madridshops.domain.model.Entities
+import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.model.Shop
-import com.gmb.madridshops.domain.model.Shops
+import com.gmb.madridshops.domain.util.EntityType
 import com.gmb.madridshops.fragment.EntityListFragment
 import com.gmb.madridshops.router.Router
 import com.gmb.madridshops.util.DEFAULT_MADRID_LATIDUDE
 import com.gmb.madridshops.util.DEFAULT_MADRID_LONGITUDE
+import com.gmb.madridshops.util.EXTRA_ENTITY_TYPE
+import com.gmb.madridshops.util.EXTRA_SELECTED_ENTITY
 import com.gmb.madridshops.util.map.MapUtil
-import com.gmb.madridshops.util.map.model.ShopPin
+import com.gmb.madridshops.util.map.model.EntityPin
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 
-class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
+class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
 
     private lateinit var containerListFragment: EntityListFragment
 
     private var map: GoogleMap? = null
-    private var list: Shops? = null
+    private var list: Entities? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,23 +49,22 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        Log.d("App", "onCreate EntityListActivity")
 
-        Log.d("App", "onCreate ShopsActivity")
+        val intent = intent
+        val entityType = intent.getSerializableExtra(EXTRA_ENTITY_TYPE) as EntityType
 
         setupMap()
 
-        supportActionBar?.title = "SHOPS"
+        supportActionBar?.title = entityType.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
     }
 
-
-
     private fun setupMap() {
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
-        getAllShopsInteractor.execute(object: SuccessCompletion<Shops>{
-            override fun successCompletion(e: Shops) {
+        getAllShopsInteractor.execute(object: SuccessCompletion<Entities>{
+            override fun successCompletion(e: Entities) {
                 list = e
                 setupList()
                 initializeMap(e)
@@ -78,10 +81,10 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
 
     private fun setupList() {
         containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as EntityListFragment
-        containerListFragment.setEntities(list!!.shops)
+        containerListFragment.setEntities(list!!.entities)
     }
 
-    private fun initializeMap(shops: Shops) {
+    private fun initializeMap(entities: Entities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
         mapFragment.getMapAsync({
             Log.d("SUCCESS", "HABEMUS MAPA")
@@ -91,7 +94,7 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
             it.uiSettings.isZoomControlsEnabled = true
             showUserPosition(baseContext, it)
             map = it
-            addAllPins(shops)
+            addAllPins(entities)
         })
 
     }
@@ -125,9 +128,9 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
         }
     }
 
-    private fun addAllPins(shops: Shops){
+    private fun addAllPins(entities: Entities){
 
-        val shopPins = ShopPin.shopPinsFromShops(shops)
+        val shopPins = EntityPin.entityPins(entities)
 
         MapUtil().addPins(shopPins, map, this)
 
@@ -158,7 +161,7 @@ class ShopsActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickList
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onEntityClicked(position: Int, entity: Shop, view: View) {
+    override fun onEntityClicked(position: Int, entity: Entity, view: View) {
         Router().navigateFromListActivityToDetailActivity(this, entity)
     }
 
