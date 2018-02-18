@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.gmb.madridshops.R
 import com.gmb.madridshops.adapter.RecyclerViewAdapter
@@ -45,9 +46,6 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_entity_list)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
         Log.d("App", "onCreate EntityListActivity")
 
         val intent = intent
@@ -55,10 +53,21 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
         setupData()
 
-        supportActionBar?.title = entityType.toString()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        displayToolbar(entityType)
 
     }
+
+    private fun displayToolbar(entityType: EntityType) {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val title = findViewById<TextView>(R.id.toolbar_title)
+        setSupportActionBar(toolbar)
+
+        title.text = entityType.toString()
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+
 
     private fun setupData() {
 

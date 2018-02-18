@@ -34,6 +34,8 @@ class MadridShopsApp : MultiDexApplication() {
                     }
         })
 
+
+
     }
 
     private fun activitiesInteractor() {

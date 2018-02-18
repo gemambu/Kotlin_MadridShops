@@ -17,14 +17,18 @@ class EntityDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entity_detail)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
         val intent = intent
         val entity = intent.getSerializableExtra(EXTRA_SELECTED_ENTITY) as Shop
 
         containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_list_detail_fragment) as EntityDetailFragment
         containerListFragment.setEntity(entity)
+
+        displayToolbar(entity)
+    }
+
+    private fun displayToolbar(entity: Shop) {
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         supportActionBar?.title = entity.name + "-" + entity.type
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
