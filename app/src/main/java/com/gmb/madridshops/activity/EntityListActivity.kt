@@ -26,9 +26,7 @@ import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.domain.util.EntityType
 import com.gmb.madridshops.fragment.EntityListFragment
 import com.gmb.madridshops.router.Router
-import com.gmb.madridshops.util.DEFAULT_MADRID_LATIDUDE
-import com.gmb.madridshops.util.DEFAULT_MADRID_LONGITUDE
-import com.gmb.madridshops.util.EXTRA_ENTITY_TYPE
+import com.gmb.madridshops.util.*
 import com.gmb.madridshops.util.map.MapUtil
 import com.gmb.madridshops.util.map.model.EntityPin
 import com.google.android.gms.maps.GoogleMap
@@ -46,7 +44,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_entity_list)
 
-        Log.d("App", "onCreate EntityListActivity")
+        Log.d(APP, "onCreate EntityListActivity")
 
         val intent = intent
         val entityType = intent.getSerializableExtra(EXTRA_ENTITY_TYPE) as EntityType
@@ -62,12 +60,21 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         val title = findViewById<TextView>(R.id.toolbar_title)
         setSupportActionBar(toolbar)
 
-        title.text = entityType.toString()
+        title.text = getTitle(entityType)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
 
+    private fun getTitle(entityType: EntityType) : String {
+        var type = ""
+        when(entityType){
+            EntityType.ACTIVITY -> type = getString(R.string.list_entity_activities)
+            EntityType.SHOP -> type = getString(R.string.list_entity_shops)
+        }
+
+        return type
+    }
 
     private fun setupData() {
 
@@ -84,7 +91,11 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
         }, object: ErrorCompletion{
             override fun errorCompletion(errorMessage: String) {
-                Toast.makeText(baseContext, "Error loading", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                        baseContext,
+                        getString(R.string.error_loading_list),
+                        Toast.LENGTH_LONG
+                ).show()
             }
 
         })
@@ -98,7 +109,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     private fun initializeMap(entities: Entities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
         mapFragment.getMapAsync({
-            Log.d("SUCCESS", "HABEMUS MAPA")
+            Log.d(SUCCESS, getString(R.string.loaded_map_correctly))
 
             MapUtil().centerMapInPosition(it, DEFAULT_MADRID_LATIDUDE, DEFAULT_MADRID_LONGITUDE)
             it.uiSettings.isRotateGesturesEnabled = false
@@ -150,7 +161,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
                 return@OnInfoWindowClickListener
             }
             val shop = marker.tag as Shop?
-            Log.d("APP", "Show detail for shop: ${shop?.name}")
+            Log.d(APP, "Show detail for shop: ${shop?.name}")
             Router().navigateFromListActivityToDetailActivity(this, shop!!)
         })
 

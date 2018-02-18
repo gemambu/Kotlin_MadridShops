@@ -4,10 +4,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_picasso">PicassoActivity</string>
-    <string name="title_activity_test">TestActivity</string>
     <string name="main_shops_bttn">Shops</string>
     <string name="main_activities_bttn">Activities</string>
     <string name="content_entity_logo">Logo</string>
     <string name="detail_entity_map_desc">Map with the address</string>
+    <string name="list_entity_shops">Shops list</string>
+    <string name="list_entity_activities">Activities list</string>
+    <string name="error_loading_list">Error loading</string>
+    <string name="loaded_map_correctly">Map loaded correctly!</string>
 </resources>

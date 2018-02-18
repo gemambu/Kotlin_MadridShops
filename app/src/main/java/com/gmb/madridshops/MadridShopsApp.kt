@@ -7,6 +7,7 @@ import com.gmb.madridshops.domain.interactor.SuccessCompletion
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractorImpl
 import com.gmb.madridshops.domain.model.Entities
 import com.gmb.madridshops.domain.util.EntityType
+import com.gmb.madridshops.util.APP
 import com.gmb.madridshops.util.ERROR
 import com.gmb.madridshops.util.SUCCESS
 
@@ -17,7 +18,7 @@ class MadridShopsApp : MultiDexApplication() {
 
         // init code application wide
 
-        Log.d("App", "onCreate")
+        Log.d(APP, "onCreate")
 
         val allShopsInteractor = GetAllEntitiesInteractorImpl(this)
 
