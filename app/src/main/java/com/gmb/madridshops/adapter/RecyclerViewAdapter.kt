@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.model.Entity
-import com.gmb.madridshops.domain.model.Shop
 import com.squareup.picasso.Picasso
 
 
@@ -18,7 +17,7 @@ class RecyclerViewAdapter(private var listData: List<Entity>?, private val liste
     private var onEntityClickListener: OnEntityClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): EntityViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.content_entity, parent, false)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.content_cell_entity, parent, false)
         onEntityClickListener = listener
         return EntityViewHolder(view)
     }

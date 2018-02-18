@@ -17,21 +17,23 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-
             <Button
                 android:id="@+id/main_activity_shops_button"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/show_shops_btn"
-                android:text="@string/main_shops_bttn"
-                />
+                android:drawableStart="@drawable/show_shops_btn"
+                android:text="@string/main_shops_bttn" />
             <Button
                 android:id="@+id/main_activity_activities_button"
+                android:layout_marginTop="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/show_activities_btn"
+                android:drawableStart="@drawable/show_activities_btn"
                 android:layout_weight="1"
+                style="?android:attr/buttonBarButtonStyle"
                 android:text="@string/main_activities_bttn"/>
         </LinearLayout>
 

@@ -67,10 +67,9 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
 
     private fun getTitle(entityType: EntityType) : String {
-        var type = ""
-        when(entityType){
-            EntityType.ACTIVITY -> type = getString(R.string.list_entity_activities)
-            EntityType.SHOP -> type = getString(R.string.list_entity_shops)
+        var type = when(entityType){
+            EntityType.ACTIVITY -> getString(R.string.list_entity_activities)
+            EntityType.SHOP -> getString(R.string.list_entity_shops)
         }
 
         return type
