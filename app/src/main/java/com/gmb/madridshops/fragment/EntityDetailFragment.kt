@@ -9,6 +9,7 @@ import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.model.Shop
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_entity_detail.*
+import java.util.*
 
 
 class EntityDetailFragment : Fragment() {
@@ -31,11 +32,23 @@ class EntityDetailFragment : Fragment() {
                 .into(entity_detail_map)
 
         entity_detail_name.text = entityDetail.name.toUpperCase()
-        entity_detail_desc.text = entityDetail.description_en
+
+        when (Locale.getDefault().getLanguage()){
+            "es" -> {
+                entity_detail_desc.text = entityDetail.description_es
+                entity_detail_hours.text = entityDetail.openingHours_es
+            }
+            else ->  {
+                entity_detail_desc.text = entityDetail.description_en
+                entity_detail_hours.text = entityDetail.openingHours_en
+            }
+
+        }
+
+
         entity_detail_hours.text = entityDetail.openingHours_en
         entity_detail_address.text = entityDetail.address
     }
-
 
     private lateinit var root: View
 
@@ -51,29 +64,4 @@ class EntityDetailFragment : Fragment() {
 
     }
 
-//    override fun onAttach(context: Context?) {
-//        super.onAttach(context)
-//        commonOnAttach(context)
-//    }
-//
-//    override fun onAttach(activity: Activity?) {
-//        super.onAttach(activity)
-//        commonOnAttach(activity)
-//    }
-//
-//    private fun commonOnAttach(context: Context?) {
-//        // Aquí nos llaman cuando el fragment "se engancha" a la actividad, y por tanto ya pertence a ella
-//        // Lo que vamos a hacer es quedarnos con la referencia a esa actividad para cuando tengamos que avisarle de "cosas"
-//        if (context is RecyclerViewAdapter.OnEntityClickListener) {
-//            onEntityClickListener = context
-//        }
-//    }
-//
-//    override fun onDetach() {
-//        super.onDetach()
-//
-//        // Si la actividad se "desengancha" de este fragment ya no tiene sentido guardar una referencia a ella, ya no le vamos
-//        // a avisar de nada, lo ponemos a null
-//        onEntityClickListener = null
-//    }
 }// Required empty public constructor
