@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gmb.madridshops.R
+import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.model.Shop
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_entity_detail.*
@@ -14,9 +15,9 @@ import java.util.*
 
 class EntityDetailFragment : Fragment() {
 
-    private lateinit var entityDetail: Shop
+    private lateinit var entityDetail: Entity
 
-    fun setEntity(entity:  Shop) {
+    fun setEntity(entity: Entity) {
         this.entityDetail = entity
 
         loadEntityData()
@@ -45,8 +46,6 @@ class EntityDetailFragment : Fragment() {
 
         }
 
-
-        entity_detail_hours.text = entityDetail.openingHours_en
         entity_detail_address.text = entityDetail.address
     }
 

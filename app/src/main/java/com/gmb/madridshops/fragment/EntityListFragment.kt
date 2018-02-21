@@ -33,17 +33,8 @@ class EntityListFragment : Fragment() {
         adapter = RecyclerViewAdapter(listData, onEntityClickListener)
         entityListRecyclerView.adapter = adapter
 
-        //setListenerToAdapter(adapter!!)
     }
 
-    /* private fun setListenerToAdapter(adapter: RecyclerViewAdapter) {
-         adapter.onClickListener = View.OnClickListener { v: View? ->
-             val position = shopRecyclerView.getChildAdapterPosition(v)
-             val shop = listData?.get(position)
-             // Send order to navigate to activity container
-             onShowShopDetail?.showShopDetail(shop!!)
-         }
-     }*/
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -39,7 +39,7 @@ class RepositoryImplementation(context: Context) : Repository {
 
         when(type) {
             "SHOP" -> url = BuildConfig.MADRID_SHOPS_SERVER_URL
-            "ACTIVITY" -> url = BuildConfig.MADRID_SHOPS_SERVER_URL
+            "ACTIVITY" -> url = BuildConfig.MADRID_ACTIVITIES_SERVER_URL
         }
         val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get()!!)
         jsonManager.execute(url, success = object : SuccessCompletion<String> {

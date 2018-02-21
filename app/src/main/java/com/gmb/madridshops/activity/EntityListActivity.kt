@@ -38,7 +38,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
     private var map: GoogleMap? = null
     private var list: Entities? = null
-
+    private lateinit var entityType: EntityType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,26 +47,26 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         Log.d(APP, "onCreate EntityListActivity")
 
         val intent = intent
-        val entityType = intent.getSerializableExtra(EXTRA_ENTITY_TYPE) as EntityType
+        entityType = intent.getSerializableExtra(EXTRA_ENTITY_TYPE) as EntityType
 
         setupData()
 
-        displayToolbar(entityType)
+        displayToolbar()
 
     }
 
-    private fun displayToolbar(entityType: EntityType) {
+    private fun displayToolbar() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val title = findViewById<TextView>(R.id.toolbar_title)
         setSupportActionBar(toolbar)
 
-        title.text = getTitle(entityType)
+        title.text = getTitleEntity()
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
 
-    private fun getTitle(entityType: EntityType) : String {
+    private fun getTitleEntity() : String {
         var type = when(entityType){
             EntityType.ACTIVITY -> getString(R.string.list_entity_activities)
             EntityType.SHOP -> getString(R.string.list_entity_shops)
@@ -79,7 +79,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
         val getAllShopsInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
 
-        getAllShopsInteractor.execute(EntityType.SHOP, object: SuccessCompletion<Entities>{
+        getAllShopsInteractor.execute(entityType, object: SuccessCompletion<Entities>{
 
             override fun successCompletion(e: Entities) {
                 list = e
@@ -156,12 +156,12 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         MapUtil().addPins(shopPins, map, this)
 
         map?.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener { marker ->
-            if (marker.tag == null || marker.tag !is Shop) {
+            if (marker.tag == null || marker.tag !is Entity) {
                 return@OnInfoWindowClickListener
             }
-            val shop = marker.tag as Shop?
-            Log.d(APP, "Show detail for shop: ${shop?.name}")
-            Router().navigateFromListActivityToDetailActivity(this, shop!!)
+            val entity = marker.tag as Entity?
+            Log.d(APP, "Show detail for entity: ${entity?.name}")
+            Router().navigateFromListActivityToDetailActivity(this, entity!!)
         })
 
     }
