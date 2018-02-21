@@ -4,37 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity"
-    android:background="@drawable/background_madrid_shops">
+    android:background="@drawable/background_madrid_shops"
+    tools:context=".activity.MainActivity">
 
-    <include layout="@layout/toolbar"
+
+    <include
+        layout="@layout/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/main_activity_shops_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginTop="200dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/show_shops_btn"
+            android:text="@string/main_shops_bttn" />
 
-            <Button
-                android:id="@+id/main_activity_shops_button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="200dp"
-                android:layout_weight="1"
-                android:drawableStart="@drawable/show_shops_btn"
-                android:text="@string/main_shops_bttn" />
-            <Button
-                android:id="@+id/main_activity_activities_button"
-                android:layout_marginTop="200dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/show_activities_btn"
-                android:layout_weight="1"
-                style="?android:attr/buttonBarButtonStyle"
-                android:text="@string/main_activities_bttn"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/main_activity_activities_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/show_activities_btn"
+            android:text="@string/main_activities_bttn" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <ProgressBar
+            android:id="@+id/main_activity_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>
