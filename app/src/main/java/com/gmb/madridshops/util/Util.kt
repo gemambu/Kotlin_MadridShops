@@ -6,6 +6,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.preference.PreferenceManager
 
+/**
+ * Auxiliar methids to check the connection and preferences when the App is started
+ */
 
 fun checkPreferences(context: Context): Boolean {
 

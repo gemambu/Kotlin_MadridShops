@@ -159,6 +159,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
             }
             val entity = marker.tag as Entity?
             Log.d(APP, "Show detail for entity: ${entity?.name}")
+
             Router().navigateFromListActivityToDetailActivity(this, entity!!)
         })
 

@@ -20,43 +20,39 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var viewHasBeenSet = false
     private var context: Context = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (!viewHasBeenSet){
+        manageActivityComponents(false)
 
-            if ((!checkPreferences(this)) && (!checkConnection(this))) {
+        if ((!checkPreferences(this)) && (!checkConnection(this))) {
 
-                // show no connection message
-                val alertDialog = AlertDialog.Builder(this@MainActivity).create()
+            // show no connection message
+            val alertDialog = AlertDialog.Builder(this@MainActivity).create()
 
-                alertDialog.setTitle("ERROR!")
-                alertDialog.setMessage("There is no connection and no data!")
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", {
-                    dialogInterface, i ->
-                    Snackbar.make(findViewById(android.R.id.content),
-                            "Please, enable the connection or find a WIFI :)", Snackbar.LENGTH_LONG)
-                            .show()
+            alertDialog.setTitle("ERROR!")
+            alertDialog.setMessage("There is no connection and no data!")
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", { dialogInterface, i ->
+                Snackbar.make(findViewById(android.R.id.content),
+                        "Please, enable the connection or find a WIFI :)", Snackbar.LENGTH_LONG)
+                        .show()
 
-                    // TODO complete or retry again ???
-                })
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Close App", {
-                    dialogInterface, i -> finish()
-                    System.exit(0)
-                })
+                // TODO complete or retry again ???
+            })
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Close App", { dialogInterface, i ->
+                finish()
+                System.exit(0)
+            })
 
-                alertDialog.show()
+            alertDialog.show()
 
-            } else {
-                initializeData()
-                viewHasBeenSet = true
-
-            }
+        } else {
+            initializeData()
         }
+
 
         main_activity_shops_button.setOnClickListener {
             Log.d(MainActivity::class.java.canonicalName, "Clicked on Shops")
@@ -70,10 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initializeData(){
-
-        disableButtons()
-        displaySpinner()
+    private fun initializeData() {
 
         val allShopsInteractor = GetAllEntitiesInteractorImpl(this)
 
@@ -98,9 +91,9 @@ class MainActivity : AppCompatActivity() {
                     override fun successCompletion(e: Entities) {
                         Log.d(SUCCESS, "Activities count: " + e.count())
 
-                        hideSpinner()
-                        enableButtons()
                         updatePreferences(context)
+                        manageActivityComponents(true)
+
                     }
 
                 }, error = object : ErrorCompletion {
@@ -112,25 +105,21 @@ class MainActivity : AppCompatActivity() {
 
     /******* Auxiliar methods to manage the view: progress bar, buttons... *******/
 
-    private fun displaySpinner(){
-
-        main_activity_progress_bar.visibility = View.VISIBLE
-        main_activity_progress_bar.animate()
+    private fun manageActivityComponents(status: Boolean) {
+        when (status) {
+            true -> {
+                main_activity_progress_bar.visibility = View.GONE
+                main_activity_activities_button.isEnabled = true
+                main_activity_shops_button.isEnabled = true
+            }
+            false -> {
+                main_activity_progress_bar.visibility = View.VISIBLE
+                main_activity_progress_bar.animate()
+                main_activity_activities_button.isEnabled = false
+                main_activity_shops_button.isEnabled = false
+            }
+        }
     }
 
-    private fun hideSpinner(){
-
-        main_activity_progress_bar.visibility = View.GONE
-    }
-
-    private fun disableButtons(){
-        main_activity_activities_button.isEnabled = false
-        main_activity_shops_button.isEnabled = false
-    }
-
-    private fun enableButtons(){
-        main_activity_activities_button.isEnabled = true
-        main_activity_shops_button.isEnabled = true
-    }
 
 }
