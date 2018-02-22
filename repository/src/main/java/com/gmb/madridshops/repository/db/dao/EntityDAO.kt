@@ -8,7 +8,7 @@ import com.gmb.madridshops.repository.db.DBHelper
 import com.gmb.madridshops.repository.model.EntityData
 
 
-class EntityDAO(private val dbHelper: DBHelper) : DAOPersistable<EntityData> {
+class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
 
     private val dbReadOnlyConn: SQLiteDatabase = dbHelper.readableDatabase
     private val dbReadWriteOnlyConn: SQLiteDatabase = dbHelper.writableDatabase

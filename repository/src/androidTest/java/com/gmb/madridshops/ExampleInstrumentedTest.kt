@@ -3,7 +3,6 @@ package com.gmb.madridshops
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.gmb.madridshops.repository.db.buildHelper
-import com.gmb.madridshops.repository.db.dao.EntityDAO
 import org.junit.Test
 import org.junit.runner.RunWith
 

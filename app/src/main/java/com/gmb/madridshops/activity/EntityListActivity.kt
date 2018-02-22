@@ -22,7 +22,6 @@ import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteracto
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractorImpl
 import com.gmb.madridshops.domain.model.Entities
 import com.gmb.madridshops.domain.model.Entity
-import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.domain.util.EntityType
 import com.gmb.madridshops.fragment.EntityListFragment
 import com.gmb.madridshops.router.Router
@@ -67,12 +66,11 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
 
     private fun getTitleEntity() : String {
-        var type = when(entityType){
+
+        return when(entityType){
             EntityType.ACTIVITY -> getString(R.string.list_entity_activities)
             EntityType.SHOP -> getString(R.string.list_entity_shops)
         }
-
-        return type
     }
 
     private fun setupData() {

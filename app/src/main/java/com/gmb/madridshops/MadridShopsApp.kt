@@ -2,14 +2,7 @@ package com.gmb.madridshops
 
 import android.support.multidex.MultiDexApplication
 import android.util.Log
-import com.gmb.madridshops.domain.interactor.ErrorCompletion
-import com.gmb.madridshops.domain.interactor.SuccessCompletion
-import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractorImpl
-import com.gmb.madridshops.domain.model.Entities
-import com.gmb.madridshops.domain.util.EntityType
 import com.gmb.madridshops.util.APP
-import com.gmb.madridshops.util.ERROR
-import com.gmb.madridshops.util.SUCCESS
 
 class MadridShopsApp : MultiDexApplication() {
 
@@ -19,7 +12,7 @@ class MadridShopsApp : MultiDexApplication() {
         // init code application wide
 
         Log.d(APP, "onCreate")
-
+/*
         val allShopsInteractor = GetAllEntitiesInteractorImpl(this)
 
         allShopsInteractor.execute(EntityType.SHOP,
@@ -51,7 +44,7 @@ class MadridShopsApp : MultiDexApplication() {
             override fun errorCompletion(errorMessage: String) {
                 Log.d(ERROR, errorMessage)
             }
-        })
+        })*/
     }
 
 }

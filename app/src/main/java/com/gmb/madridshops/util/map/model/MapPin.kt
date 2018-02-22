@@ -2,7 +2,6 @@ package com.gmb.madridshops.util.map.model
 
 import com.gmb.madridshops.domain.model.Entities
 import com.gmb.madridshops.domain.model.Entity
-import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.util.map.MapPinneable
 
 class EntityPin(override val relatedModelObject: Entity) : MapPinneable<Entity> {
@@ -26,9 +25,7 @@ class EntityPin(override val relatedModelObject: Entity) : MapPinneable<Entity> 
 
         fun entityPins(entities: Entities): List<MapPinneable<Entity>> {
             val entityList = entities.entities
-            val entityPinList = entityList.map { EntityPin(it) }
-
-            return entityPinList
+            return entityList.map { EntityPin(it) }
         }
     }
 }

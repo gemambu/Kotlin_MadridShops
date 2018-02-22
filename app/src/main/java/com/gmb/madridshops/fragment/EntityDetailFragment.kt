@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.model.Entity
-import com.gmb.madridshops.domain.model.Shop
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_entity_detail.*
 import java.util.*
@@ -34,7 +33,7 @@ class EntityDetailFragment : Fragment() {
 
         entity_detail_name.text = entityDetail.name.toUpperCase()
 
-        when (Locale.getDefault().getLanguage()){
+        when (Locale.getDefault().language){
             "es" -> {
                 entity_detail_desc.text = entityDetail.description_es
                 entity_detail_hours.text = entityDetail.openingHours_es

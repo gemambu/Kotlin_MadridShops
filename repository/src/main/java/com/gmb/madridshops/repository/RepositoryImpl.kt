@@ -41,17 +41,21 @@ class RepositoryImplementation(context: Context) : Repository {
             "SHOP" -> url = BuildConfig.MADRID_SHOPS_SERVER_URL
             "ACTIVITY" -> url = BuildConfig.MADRID_ACTIVITIES_SERVER_URL
         }
+
         val jsonManager: GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get()!!)
         jsonManager.execute(url, success = object : SuccessCompletion<String> {
             override fun successCompletion(e: String) {
+
                 val parser = JsonEntitiesParser()
                 val responseEntity: ResponseEntity
+
                 try {
                     responseEntity = parser.parse(e)
                 } catch (e: InvalidFormatException) {
                     error("Error parsing")
                     return
                 }
+
                 cache.deleteAllEntities(success = {
                     // store result in cache
                     cache.saveAllEntities(type, responseEntity.result, success = {

@@ -20,12 +20,13 @@ internal class CacheImplementation(context: Context) : Cache {
             val entityList = EntityDAO(dbHelper).query(type)
 
             if (entityList.isNotEmpty()){
-                dbHelper.close()
+                //dbHelper.close()
                 success(entityList)
             } else {
-                dbHelper.close()
-                error("Error getting ${type} list")
+                //dbHelper.close()
+                error("Error getting $type list")
             }
+            dbHelper.close()
         }).run()
 
     }
@@ -42,7 +43,7 @@ internal class CacheImplementation(context: Context) : Cache {
             } catch (ex: Exception) {
                 DispatchOnMainThread(Runnable {
                   error("Error inserting entities: " + ex.message.toString())
-                    dbHelper.close();
+                    dbHelper.close()
                 })
             }
         }).run()
@@ -54,13 +55,14 @@ internal class CacheImplementation(context: Context) : Cache {
 
             DispatchOnMainThread(Runnable {
                 if (successDeleting) {
-                    dbHelper.close()
+                    //dbHelper.close()
                     success()
 
                 } else {
-                    dbHelper.close()
+                    //dbHelper.close()
                     error("Error deleting")
                 }
+                dbHelper.close()
             })
 
         }).run()
