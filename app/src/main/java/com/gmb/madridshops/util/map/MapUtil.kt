@@ -1,6 +1,7 @@
 package com.gmb.madridshops.util.map
 
 import android.content.Context
+import android.util.Log
 import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.model.Entity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -14,7 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapUtil {
 
 
-    fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double){
+    fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double) {
         val coordinate = LatLng(latitude, longitude)
 
         val cameraPosition = CameraPosition.Builder()
@@ -31,11 +32,17 @@ class MapUtil {
         }
 
         for (pinnable in mapPinnables) {
-            val position = LatLng(pinnable.latitude.toDouble(), pinnable.longitude.toDouble())
-            val icon = BitmapDescriptorFactory.fromResource(R.drawable.pin)
-            val marker = MarkerOptions().position(position).title(pinnable.pinDescription).icon(icon)
-            val m = googleMap.addMarker(marker)
-            m.tag = pinnable.relatedModelObject
+
+            if (pinnable.latitude == 0f && pinnable.longitude == 0f) {
+                Log.d("WARNING", "The entity ${pinnable.name} has not coordinates, it cannot be displayed in the map")
+            } else {
+                val position = LatLng(pinnable.latitude.toDouble(), pinnable.longitude.toDouble())
+                val icon = BitmapDescriptorFactory.fromResource(R.drawable.pin)
+                val marker = MarkerOptions().position(position).title(pinnable.pinDescription).icon(icon)
+                val m = googleMap.addMarker(marker)
+                m.tag = pinnable.relatedModelObject
+            }
+
         }
     }
 }

@@ -14,10 +14,13 @@ class EntityPin(override val relatedModelObject: Entity) : MapPinneable<Entity> 
         get() = relatedModelObject.longitude
 
     override val pinDescription: String
-        get() = relatedModelObject.name+ " - " + relatedModelObject.address
+        get() = relatedModelObject.name + " - " + relatedModelObject.address
 
     override val pinImageUrl: String
         get() = relatedModelObject.logo
+
+    override val name: String
+        get() = relatedModelObject.name
 
     companion object {
 

@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        disableButtons()
-        displaySpinner()
+        //disableButtons()
+        //displaySpinner()
 
         main_activity_shops_button.setOnClickListener {
             Log.d(MainActivity::class.java.canonicalName, "Clicked on Shops")
