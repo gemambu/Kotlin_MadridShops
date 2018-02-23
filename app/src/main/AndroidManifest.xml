@@ -24,13 +24,13 @@
 
     <application
         android:name=".MadridShopsApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="true">
+        android:theme="@style/AppTheme">
 
         <!-- Google Maps API Key -->
         <meta-data
@@ -57,6 +57,8 @@
         <activity
             android:name=".activity.EntityDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.FunActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

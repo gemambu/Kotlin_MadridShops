@@ -4,7 +4,9 @@ import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -29,7 +31,13 @@ import com.gmb.madridshops.util.*
 import com.gmb.madridshops.util.map.MapUtil
 import com.gmb.madridshops.util.map.model.EntityPin
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
 
@@ -65,9 +73,9 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     }
 
 
-    private fun getTitleEntity() : String {
+    private fun getTitleEntity(): String {
 
-        return when(entityType){
+        return when (entityType) {
             EntityType.ACTIVITY -> getString(R.string.list_entity_activities)
             EntityType.SHOP -> getString(R.string.list_entity_shops)
         }
@@ -77,7 +85,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
         val getAllShopsInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
 
-        getAllShopsInteractor.execute(entityType, object: SuccessCompletion<Entities>{
+        getAllShopsInteractor.execute(entityType, object : SuccessCompletion<Entities> {
 
             override fun successCompletion(e: Entities) {
                 list = e
@@ -86,7 +94,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
             }
 
-        }, object: ErrorCompletion{
+        }, object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
                 Toast.makeText(
                         baseContext,
@@ -105,24 +113,30 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
     private fun initializeMap(entities: Entities) {
         val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
+
+
         mapFragment.getMapAsync({
             Log.d(SUCCESS, getString(R.string.loaded_map_correctly))
 
             MapUtil().centerMapInPosition(it, DEFAULT_MADRID_LATIDUDE, DEFAULT_MADRID_LONGITUDE)
             it.uiSettings.isRotateGesturesEnabled = false
             it.uiSettings.isZoomControlsEnabled = true
+            it.snapshot { }
             showUserPosition(baseContext, it)
             map = it
+
             addAllPins(entities)
+
         })
+
 
     }
 
-    private fun showUserPosition(context: Context, map: GoogleMap?){
-        if(ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
+    private fun showUserPosition(context: Context, map: GoogleMap?) {
+        if (ActivityCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED){
+                        != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this,
                     arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION),
@@ -136,18 +150,17 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     }
 
 
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 10){
-            try{
+        if (requestCode == 10) {
+            try {
                 map?.isMyLocationEnabled = true
-            } catch (e: SecurityException){
+            } catch (e: SecurityException) {
             }
         }
     }
 
-    private fun addAllPins(entities: Entities){
+    private fun addAllPins(entities: Entities) {
 
         val shopPins = EntityPin.entityPins(entities)
 

@@ -20,15 +20,15 @@ class RepositoryImplementation(context: Context) : Repository {
 
     override fun getAllEntities(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
-        // Read all shops from cache
+        // Read all entities from cache
         cache.getAllEntities(type,
                 success = {
-                    // if there are shops in the cache, return them
+                    // if there are entities in the cache, return them
                     success(it)
                 }, error = {
-                    // if no shops in cache --> network
-                    populateCache(type, success, error)
-                })
+            // if no shops in cache --> network
+            populateCache(type, success, error)
+        })
 
     }
 
@@ -37,7 +37,7 @@ class RepositoryImplementation(context: Context) : Repository {
 
         var url = ""
 
-        when(type) {
+        when (type) {
             "SHOP" -> url = BuildConfig.MADRID_SHOPS_SERVER_URL
             "ACTIVITY" -> url = BuildConfig.MADRID_ACTIVITIES_SERVER_URL
         }
@@ -56,15 +56,11 @@ class RepositoryImplementation(context: Context) : Repository {
                     return
                 }
 
-                cache.deleteAllEntities(success = {
-                    // store result in cache
-                    cache.saveAllEntities(type, responseEntity.result, success = {
-                        success(responseEntity.result)
-                    }, error = {
-                        error("Something happened on the way to heaven!")
-                    })
+
+                cache.saveAllEntities(type, responseEntity.result, success = {
+                    success(responseEntity.result)
                 }, error = {
-                    error("something happened deleting all the info")
+                    error("Something happened on the way to heaven!")
                 })
 
             }

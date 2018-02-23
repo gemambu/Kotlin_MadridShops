@@ -12,4 +12,5 @@
     <string name="list_entity_activities">Activities list</string>
     <string name="error_loading_list">Error loading</string>
     <string name="loaded_map_correctly">Map loaded correctly!</string>
+    <string name="fun_activity_description">A little culture of the Pradera while you get a connection to the network to download the information. Click on the image, cobarder!</string>
 </resources>

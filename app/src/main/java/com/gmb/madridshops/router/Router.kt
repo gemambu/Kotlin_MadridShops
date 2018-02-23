@@ -3,6 +3,7 @@ package com.gmb.madridshops.router
 import android.content.Intent
 import com.gmb.madridshops.activity.EntityDetailActivity
 import com.gmb.madridshops.activity.EntityListActivity
+import com.gmb.madridshops.activity.FunActivity
 import com.gmb.madridshops.activity.MainActivity
 import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.util.EntityType
@@ -29,5 +30,10 @@ class Router {
         val intent = Intent(listActivity, EntityDetailActivity::class.java)
         intent.putExtra(EXTRA_SELECTED_ENTITY, selectedItem)
         listActivity.startActivity(intent)
+    }
+
+    fun navigateFromMainActivityToFunActivity(mainActivity: MainActivity) {
+
+        mainActivity.startActivity(Intent(mainActivity, FunActivity::class.java))
     }
 }
