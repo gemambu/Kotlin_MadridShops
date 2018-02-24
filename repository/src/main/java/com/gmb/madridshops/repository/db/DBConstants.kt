@@ -1,5 +1,7 @@
 package com.gmb.madridshops.repository.db
 
+import android.icu.text.DateTimePatternGenerator.PatternInfo.CONFLICT
+
 object DBConstants {
     val TABLE_ENTITY = "ENTITY"
 
@@ -55,6 +57,7 @@ object DBConstants {
                     + KEY_ENTITY_OPENING_HOURS_EN + " text, "
                     + KEY_ENTITY_OPENING_HOURS_ES + " text, "
                     + KEY_ENTITY_TYPE + " text"
+                    //+ " ,UNIQUE ("+ KEY_ENTITY_NAME + "," + KEY_ENTITY_ADDRESS +") ON CONFLICT REPLACE"
                     + ");")
 
     val DROP_DATABASE_SCRIPTS = ""

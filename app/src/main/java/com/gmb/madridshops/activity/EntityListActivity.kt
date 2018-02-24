@@ -74,6 +74,11 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     private fun setupData() {
 
         val getAllShopsInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
@@ -166,7 +171,10 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
             val entity = marker.tag as Entity?
             Log.d(APP, "Show detail for entity: ${entity?.name}")
 
+            marker.isVisible = false
+
             Router().navigateFromListActivityToDetailActivity(this, entity!!)
+
         })
 
     }

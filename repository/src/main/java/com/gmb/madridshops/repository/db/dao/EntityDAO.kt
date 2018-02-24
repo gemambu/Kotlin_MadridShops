@@ -49,7 +49,7 @@ class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
                 null,
                 "",
                 "",
-                DBConstants.KEY_ENTITY_DATABASE_ID)
+                DBConstants.KEY_ENTITY_NAME + " ASC")
 
         while (cursor.moveToNext()) {
             val entity = entityFromCursor(cursor)!!
@@ -88,7 +88,7 @@ class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
             arrayOf(id.toString()),
             "",
             "",
-            DBConstants.KEY_ENTITY_DATABASE_ID)
+            DBConstants.KEY_ENTITY_NAME + " ASC")
 
     override fun query(type: String): List<EntityData> {
         val result = ArrayList<EntityData>()
@@ -99,7 +99,7 @@ class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
                 arrayOf(type),
                 "",
                 "",
-                DBConstants.KEY_ENTITY_DATABASE_ID)
+                DBConstants.KEY_ENTITY_NAME + " ASC")
 
         while (cursor.moveToNext()) {
             val entity = entityFromCursor(cursor)!!
@@ -110,7 +110,6 @@ class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
 
         return result
     }
-
 
     override fun insert(element: EntityData, type: String): Long = dbReadWriteOnlyConn.insert(DBConstants.TABLE_ENTITY, null, contentValues(element, type))
 

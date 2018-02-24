@@ -1,6 +1,7 @@
 package com.gmb.madridshops.repository
 
 import android.content.Context
+import android.util.Log
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.gmb.madridshops.repository.cache.Cache
 import com.gmb.madridshops.repository.cache.CacheImplementation
@@ -20,15 +21,19 @@ class RepositoryImplementation(context: Context) : Repository {
 
     override fun getAllEntities(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
-        // Read all entities from cache
-        cache.getAllEntities(type,
-                success = {
-                    // if there are entities in the cache, return them
-                    success(it)
-                }, error = {
-            // if no shops in cache --> network
-            populateCache(type, success, error)
-        })
+        cache.deleteAllEntities(success = {
+            // Read all entities from cache
+            cache.getAllEntities(type,
+                    success = {
+                        // if there are entities in the cache, return them
+                        success(it)
+                    }, error = {
+                // if no shops in cache --> network
+                populateCache(type, success, error)
+            })
+        }, error = { Log.d("ERROR", "error borrando datos")})
+
+
 
     }
 
