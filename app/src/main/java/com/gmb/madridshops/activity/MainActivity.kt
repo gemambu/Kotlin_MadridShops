@@ -13,7 +13,7 @@ import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
 import com.gmb.madridshops.domain.interactor.checkentities.CheckEntitiesImpl
-import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractorImpl
+import com.gmb.madridshops.domain.interactor.getallentities.GetAllEntitiesInteractorImpl
 import com.gmb.madridshops.domain.model.Entities
 import com.gmb.madridshops.domain.util.EntityType
 import com.gmb.madridshops.router.Router
@@ -109,6 +109,10 @@ class MainActivity : AppCompatActivity() {
                     Log.d(ERROR, errorMessage)
                 }
             })
+        } else {
+            firstLoadCompleted = true
+            updatePreferences(context)
+            manageActivityComponents(true)
         }
 
     }
@@ -123,7 +127,6 @@ class MainActivity : AppCompatActivity() {
                         updatePreferences(context)
                         manageActivityComponents(true)
 
-
                     }
 
                 }, error = object : ErrorCompletion {
@@ -133,28 +136,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    /** First option **/
-    /*
-    private fun initializeData() {
-
-        val allShopsInteractor = GetAllEntitiesInteractorImpl(this)
-
-        allShopsInteractor.execute(EntityType.SHOP,
-                success = object : SuccessCompletion<Entities> {
-                    override fun successCompletion(e: Entities) {
-                        Log.d(SUCCESS, "Shops count: " + e.count())
-                        activitiesInteractor(context)
-                    }
-
-                }, error = object : ErrorCompletion {
-            override fun errorCompletion(errorMessage: String) {
-                Log.d(ERROR, errorMessage)
-            }
-        })
-    }
-
-
-    }*/
 
     /******* Auxiliar methods to manage the view: progress bar, buttons... *******/
 
@@ -175,7 +156,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     /******* Gesture recognizer *******/
-
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         this.mDetector!!.onTouchEvent(event)

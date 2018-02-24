@@ -15,17 +15,6 @@ internal class CacheImplementation(context: Context) : Cache {
     private val context = WeakReference<Context>(context)
     private val dbHelper = cacheDBHelper()
 
-    /*  override fun countEntities(success: (total: Int) -> Unit, error: (errorMessage: String) -> Unit) {
-          Thread(Runnable {
-              val total = EntityDAO(dbHelper).count()
-
-              success(total)
-
-              dbHelper.close()
-          }).run()
-      }
-  */
-
     override fun countEntities(): Int {
 
         val total = EntityDAO(dbHelper).count()
@@ -42,7 +31,6 @@ internal class CacheImplementation(context: Context) : Cache {
             if (entityList.isNotEmpty()) {
                 success(entityList)
             } else {
-                //dbHelper.close()
                 error("Error getting $type list")
             }
             dbHelper.close()

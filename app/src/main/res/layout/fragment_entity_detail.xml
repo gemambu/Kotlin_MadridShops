@@ -18,7 +18,8 @@
         android:layout_weight="1"
         android:contentDescription="@string/detail_entity_map_desc"
         android:src="@color/colorPrimaryDark"
-        tools:src="@drawable/googleg_standard_color_18" />
+        tools:src="@drawable/googleg_standard_color_18"
+        android:alpha="127"/>
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"

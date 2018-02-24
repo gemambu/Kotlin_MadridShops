@@ -1,4 +1,4 @@
-package com.gmb.madridshops.domain.interactor.getallshops
+package com.gmb.madridshops.domain.interactor.getallentities
 
 import com.gmb.madridshops.domain.interactor.ErrorClosure
 import com.gmb.madridshops.domain.interactor.ErrorCompletion

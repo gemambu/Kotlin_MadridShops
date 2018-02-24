@@ -19,8 +19,8 @@ import com.gmb.madridshops.adapter.InfoWindowAdapter
 import com.gmb.madridshops.adapter.RecyclerViewAdapter
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
-import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractor
-import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractorImpl
+import com.gmb.madridshops.domain.interactor.getallentities.GetAllEntitiesInteractor
+import com.gmb.madridshops.domain.interactor.getallentities.GetAllEntitiesInteractorImpl
 import com.gmb.madridshops.domain.model.Entities
 import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.domain.util.EntityType
@@ -82,9 +82,9 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
     private fun setupData() {
 
-        val getAllShopsInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
+        val getAllEntitiesInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
 
-        getAllShopsInteractor.execute(entityType, object : SuccessCompletion<Entities> {
+        getAllEntitiesInteractor.execute(entityType, object : SuccessCompletion<Entities> {
 
             override fun successCompletion(e: Entities) {
                 list = e
@@ -129,6 +129,10 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
             addAllPins(entities)
 
             it.setInfoWindowAdapter(InfoWindowAdapter(this))
+            it.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener {
+                val entity: Entity = it.tag as Entity
+                Router().navigateFromListActivityToDetailActivity(this, entity)
+            })
         })
 
 
@@ -164,23 +168,9 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
     private fun addAllPins(entities: Entities) {
 
-        val shopPins = EntityPin.entityPins(entities)
+        val pins = EntityPin.entityPins(entities)
 
-        MapUtil().addPins(shopPins, map, this)
-
-        map?.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener { marker ->
-            if (marker.tag == null || marker.tag !is Entity) {
-                return@OnInfoWindowClickListener
-            }
-            val entity = marker.tag as Entity?
-            Log.d(APP, "Show detail for entity: ${entity?.name}")
-
-            marker.isVisible = false
-
-            Router().navigateFromListActivityToDetailActivity(this, entity!!)
-
-        })
-
+        MapUtil().addPins(pins, map, this)
     }
 
 

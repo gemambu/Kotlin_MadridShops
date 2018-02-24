@@ -33,7 +33,6 @@ class Router {
     }
 
     fun navigateFromMainActivityToFunActivity(mainActivity: MainActivity) {
-
         mainActivity.startActivity(Intent(mainActivity, FunActivity::class.java))
     }
 }

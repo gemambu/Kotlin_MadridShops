@@ -16,7 +16,6 @@ class FunActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fun)
 
-
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val title = findViewById<TextView>(R.id.toolbar_title)
         setSupportActionBar(toolbar)
@@ -24,8 +23,6 @@ class FunActivity : AppCompatActivity() {
         title.text = getString(R.string.fun_time_title)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
 
         fun_activity_description.text = getString(R.string.fun_activity_description)
 

@@ -1,4 +1,4 @@
-package com.gmb.madridshops.domain.interactor.deleteallshops
+package com.gmb.madridshops.domain.interactor.deleteallentities
 
 
 import android.content.Context

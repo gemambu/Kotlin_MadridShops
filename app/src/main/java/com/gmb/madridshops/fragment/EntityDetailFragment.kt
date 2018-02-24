@@ -21,7 +21,6 @@ class EntityDetailFragment : Fragment() {
         this.entityDetail = entity
 
         loadEntityData()
-
     }
 
     private fun loadEntityData() {
@@ -56,7 +55,6 @@ class EntityDetailFragment : Fragment() {
 
         if (inflater != null) {
             root = inflater.inflate(R.layout.fragment_entity_detail, container, false)
-
         }
 
         return root
