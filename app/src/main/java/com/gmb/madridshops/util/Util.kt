@@ -21,7 +21,7 @@ fun updatePreferences(context: Context) {
 
     val preferences = context.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE)
     val editor: SharedPreferences.Editor = preferences.edit()
-    
+
     editor.putBoolean(USER_PREFERENCES, true)
     editor.apply()
 }

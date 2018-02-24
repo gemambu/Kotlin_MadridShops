@@ -19,6 +19,8 @@ import com.gmb.madridshops.domain.util.EntityType
 import com.gmb.madridshops.router.Router
 import com.gmb.madridshops.util.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 
 
 class MainActivity : AppCompatActivity() {
@@ -84,6 +86,7 @@ class MainActivity : AppCompatActivity() {
             alertDialog.show()
 
         } else {
+            firstLoadCompleted = true
             initializeData()
         }
     }
@@ -94,8 +97,19 @@ class MainActivity : AppCompatActivity() {
         var total = checkEntities.execute()
 
         if (total < 1){
-            firstLoadCompleted = true
-            val allShopsInteractor = GetAllEntitiesInteractorImpl(this)
+            downloadInformation(context)
+        } else {
+            updatePreferences(context)
+            manageActivityComponents(true)
+        }
+
+    }
+
+    private fun downloadInformation(context: Context) {
+
+        async(UI) {
+
+            val allShopsInteractor = GetAllEntitiesInteractorImpl(context)
 
             allShopsInteractor.execute(EntityType.SHOP,
                     success = object : SuccessCompletion<Entities> {
@@ -109,12 +123,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d(ERROR, errorMessage)
                 }
             })
-        } else {
-            firstLoadCompleted = true
-            updatePreferences(context)
-            manageActivityComponents(true)
         }
-
     }
 
     private fun activitiesInteractor(context: Context) {

@@ -107,6 +107,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
     private fun setupList() {
         containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as EntityListFragment
+
         containerListFragment.setEntities(list!!.entities)
     }
 
