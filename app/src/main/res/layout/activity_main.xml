@@ -39,6 +39,7 @@
             android:text="@string/main_activities_bttn" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,10 +64,6 @@
 
             />
     </LinearLayout>
-
-
-
-
 
 
 </android.support.design.widget.CoordinatorLayout>

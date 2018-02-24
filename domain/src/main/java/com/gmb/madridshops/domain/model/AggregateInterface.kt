@@ -14,6 +14,6 @@ interface WriteAggregate<T> {
     fun delete(element: T)
 }
 
-interface Aggregate<T>: ReadAggregate<T>, WriteAggregate<T>
+interface Aggregate<T> : ReadAggregate<T>, WriteAggregate<T>
 
 interface Marker

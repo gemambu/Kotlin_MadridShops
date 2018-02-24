@@ -27,7 +27,7 @@ class EntityListFragment : Fragment() {
     private var adapter: RecyclerViewAdapter? = null
     private lateinit var root: View
 
-    fun setEntities(entities:  MutableList<Entity>) {
+    fun setEntities(entities: MutableList<Entity>) {
         this.listData = entities
 
         adapter = RecyclerViewAdapter(listData, onEntityClickListener)

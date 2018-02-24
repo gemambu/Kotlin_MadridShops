@@ -32,16 +32,16 @@ class DBHelper(context: Context?, name: String?, factory: SQLiteDatabase.CursorF
 
         }
 
-        if(oldVersion == 1 && newVersion == 2){
+        if (oldVersion == 1 && newVersion == 2) {
             updateChangesFromv1Tov2()
         }
 
-        if(oldVersion == 1 && newVersion == 3){
+        if (oldVersion == 1 && newVersion == 3) {
             updateChangesFromv1Tov2()
             updateChangesFromv2Tov3()
         }
 
-        if(oldVersion == 2 && newVersion == 3){
+        if (oldVersion == 2 && newVersion == 3) {
             updateChangesFromv2Tov3()
         }
 

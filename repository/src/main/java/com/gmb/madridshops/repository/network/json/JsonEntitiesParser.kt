@@ -7,7 +7,7 @@ internal class JsonEntitiesParser {
 
     val mapper = jacksonObjectMapper()
 
-    inline fun <reified T: Any>parse(json: String): T {
+    inline fun <reified T : Any> parse(json: String): T {
         return this.mapper.readValue<T>(json)
     }
 }

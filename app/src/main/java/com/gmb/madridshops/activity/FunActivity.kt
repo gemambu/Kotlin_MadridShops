@@ -1,14 +1,13 @@
 package com.gmb.madridshops.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.widget.TextView
 import com.gmb.madridshops.R
 import com.gmb.madridshops.util.`fun`.quotes
 import kotlinx.android.synthetic.main.activity_fun.*
-import org.json.JSONStringer
 import java.util.*
 
 class FunActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ class FunActivity : AppCompatActivity() {
         val title = findViewById<TextView>(R.id.toolbar_title)
         setSupportActionBar(toolbar)
 
-        title.text = "Fun time!"
+        title.text = getString(R.string.fun_time_title)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -32,7 +31,7 @@ class FunActivity : AppCompatActivity() {
 
         fun_activity_button.setOnClickListener {
             val random = Random().nextInt(quotes.size)
-           fun_activity_quote.text = quotes[random]
+            fun_activity_quote.text = quotes[random]
         }
     }
 

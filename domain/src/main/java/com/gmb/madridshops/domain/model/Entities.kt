@@ -16,15 +16,16 @@ open class Entity(val id: Int,
                   val image: String = "",
                   val logo: String = "",
                   val openingHours_en: String = "",
-                  val openingHours_es: String = ""): Serializable {
-    init{
+                  val openingHours_es: String = "") : Serializable {
+    init {
         Entities(ArrayList())
     }
 }
+
 /**
  *
  */
-class Entities(val entities: MutableList<Entity>): Aggregate<Entity>{
+class Entities(val entities: MutableList<Entity>) : Aggregate<Entity> {
     override fun count() = entities.size
 
     override fun all() = entities

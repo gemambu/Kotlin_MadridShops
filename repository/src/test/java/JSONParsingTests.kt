@@ -34,11 +34,11 @@ class JSONParsingTests {
         try {
             shop = parser.parse<EntityData>(shopsJson)
         } catch (e: InvalidFormatException) {
-            shop = EntityData(1,1,"Parsing failed","", "10", "11", "", "", "", "", "", "", "")
+            shop = EntityData(1, 1, "Parsing failed", "", "10", "11", "", "", "", "", "", "", "")
         }
         assertNotNull(shop)
-       // assertEquals("Parsing failed", shop.name)
-       // assertEquals("10", shop.latitude)
+        // assertEquals("Parsing failed", shop.name)
+        // assertEquals("10", shop.latitude)
     }
 
     @Test

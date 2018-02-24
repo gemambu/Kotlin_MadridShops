@@ -14,7 +14,7 @@ data class Shop(private val _id: Int,
                 private val _openingHours_en: String,
                 private val _openingHours_es: String,
                 val type: EntityType = EntityType.SHOP) : Entity(_id, _name, _address, _description_en, _description_es, _latitude, _longitude, _image, _logo, _openingHours_en, _openingHours_es) {
-    
+
 
     override fun toString(): String {
         return type.toString() + ": " + super.toString()
@@ -22,17 +22,17 @@ data class Shop(private val _id: Int,
 }
 
 data class Activity(val _id: Int,
-                val _name: String,
-                val _address: String,
-                val _description_en: String,
-                val _description_es: String,
-                val _latitude: Float,
-                val _longitude: Float,
-                val _image: String,
-                val _logo: String,
-                val _openingHours_en: String,
-                val _openingHours_es: String,
-                val type: EntityType = EntityType.ACTIVITY) : Entity(_id, _name, _address, _description_en, _description_es, _latitude, _longitude, _image, _logo, _openingHours_en, _openingHours_es) {
+                    val _name: String,
+                    val _address: String,
+                    val _description_en: String,
+                    val _description_es: String,
+                    val _latitude: Float,
+                    val _longitude: Float,
+                    val _image: String,
+                    val _logo: String,
+                    val _openingHours_en: String,
+                    val _openingHours_es: String,
+                    val type: EntityType = EntityType.ACTIVITY) : Entity(_id, _name, _address, _description_en, _description_es, _latitude, _longitude, _image, _logo, _openingHours_en, _openingHours_es) {
 
     override fun toString(): String {
         return type.toString() + ": " + super.toString()

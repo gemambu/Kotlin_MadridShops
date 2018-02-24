@@ -24,13 +24,13 @@ class ExampleInstrumentedTest {
 
 
         //val shop = ShopEntity(33, 1, "my shop", "",
-         //       1.0f, 2.0f, "", "", "", "my address")
+        //       1.0f, 2.0f, "", "", "", "my address")
 
 
         // val shopEntityDAO = EntityDAO(dbHelper)
 
         //val id = shopEntityDAO.insert(shop)
 
-     //   Assert.assertTrue(id > 0)
+        //   Assert.assertTrue(id > 0)
     }
 }

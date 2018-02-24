@@ -2,6 +2,7 @@ package com.gmb.madridshops.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.view.GestureDetectorCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -19,18 +20,20 @@ import com.gmb.madridshops.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
+
 
     private var context: Context = this
-    private var mDetector: GestureDetector? = null
+    private var mDetector: GestureDetectorCompat? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mDetector = GestureDetectorCompat(this, MyGestureListener(this))
+
         manageActivityComponents(false)
-        mDetector = GestureDetector(this, MyGestureListener(this))
 
         checkFirstLoad()
 
@@ -45,7 +48,6 @@ class MainActivity : AppCompatActivity(){
         }
 
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -70,8 +72,6 @@ class MainActivity : AppCompatActivity(){
                 finish()
                 System.exit(0)
             })
-
-
 
             alertDialog.show()
 
@@ -135,37 +135,31 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+    /******* Gesture recognizer *******/
 
-}
 
-
-class MyGestureListener(mainActivity: MainActivity) : GestureDetector.OnGestureListener {
-    private val main: MainActivity = mainActivity
-    override fun onShowPress(e: MotionEvent?) {
-        Router().navigateFromMainActivityToFunActivity(main)
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        this.mDetector!!.onTouchEvent(event)
+        return super.onTouchEvent(event)
     }
 
-    override fun onSingleTapUp(e: MotionEvent?): Boolean {
-        Router().navigateFromMainActivityToFunActivity(main)
-        return true
+    internal inner class MyGestureListener(mainActivity: MainActivity) : GestureDetector.SimpleOnGestureListener() {
+
+        private val mainAct = mainActivity
+
+        override fun onFling(event1: MotionEvent, event2: MotionEvent,
+                             velocityX: Float, velocityY: Float): Boolean {
+            Log.d(DEBUG_TAG, "onFling: opening fun activity with secret gesture!")
+            Router().navigateFromMainActivityToFunActivity(mainAct)
+            return true
+        }
+
+        override fun onLongPress(e: MotionEvent?) {
+            Log.d(DEBUG_TAG, "onLongPress: opening fun activity with secret gesture!")
+            Router().navigateFromMainActivityToFunActivity(mainAct)
+        }
+
     }
 
-    override fun onDown(e: MotionEvent?): Boolean {
-        Router().navigateFromMainActivityToFunActivity(main)
-        return true
-    }
 
-    override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
-        Router().navigateFromMainActivityToFunActivity(main)
-        return true
-    }
-
-    override fun onLongPress(e: MotionEvent?) {
-        Router().navigateFromMainActivityToFunActivity(main)
-    }
-
-    override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
-        Router().navigateFromMainActivityToFunActivity(main)
-        return true
-    }
 }

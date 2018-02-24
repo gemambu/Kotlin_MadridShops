@@ -21,7 +21,7 @@ data class EntityData(
         val type: String = ""
 )
 
-enum class EntityType(val type: Int): Serializable {
+enum class EntityType(val type: Int) : Serializable {
     SHOP(1),
     ACTIVITY(2)
 }

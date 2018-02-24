@@ -38,7 +38,7 @@ public class ModelTest {
         assertEquals("myAddress", shop.getAddress());
         assertEquals("desc en", shop.getDescription_en());
         assertEquals("desc es", shop.getDescription_es());
-        assertEquals(10.5f, shop.getLatitude(),0f);
+        assertEquals(10.5f, shop.getLatitude(), 0f);
         assertEquals(11.5f, shop.getLongitude(), 0f);
         assertEquals("image.png", shop.getImage());
         assertEquals("logo.png", shop.getLogo());
@@ -68,7 +68,7 @@ public class ModelTest {
         assertEquals("myAddress", activity.getAddress());
         assertEquals("desc en", activity.getDescription_en());
         assertEquals("desc es", activity.getDescription_es());
-        assertEquals(10.5f, activity.getLatitude(),0f);
+        assertEquals(10.5f, activity.getLatitude(), 0f);
         assertEquals(11.5f, activity.getLongitude(), 0f);
         assertEquals("image.png", activity.getImage());
         assertEquals("logo.png", activity.getLogo());
@@ -97,7 +97,7 @@ public class ModelTest {
         assertEquals("myAddress", entity.getAddress());
         assertEquals("desc en", entity.getDescription_en());
         assertEquals("desc es", entity.getDescription_es());
-        assertEquals(10.5f, entity.getLatitude(),0f);
+        assertEquals(10.5f, entity.getLatitude(), 0f);
         assertEquals(11.5f, entity.getLongitude(), 0f);
         assertEquals("image.png", entity.getImage());
         assertEquals("logo.png", entity.getLogo());

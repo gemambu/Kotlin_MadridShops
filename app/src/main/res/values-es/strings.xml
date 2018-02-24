@@ -12,4 +12,6 @@
     <string name="error_loading_list">Error cargando datos</string>
     <string name="loaded_map_correctly">HABEMUS MAPA</string>
     <string name="fun_activity_description">Un poco de cultura de la Pradera mientras consigues conexión a la red para descargar la información. Pulsa sobre la imagen, cobarder!</string>
+    <string name="fun_time_title">Fun time!</string>
+    <string name="fun_activity_button_desc">Fun button</string>
 </resources>

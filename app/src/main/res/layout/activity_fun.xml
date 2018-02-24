@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gmb.madridshops.activity.FunActivity"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:context="com.gmb.madridshops.activity.FunActivity">
 
 
     <include
@@ -17,34 +16,34 @@
     <TextView
         android:id="@+id/fun_activity_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_margin="8dp"
-        android:ems="10"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        android:inputType="textMultiLine" />
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:ems="10" />
 
     <ImageButton
         android:id="@+id/fun_activity_button"
-
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/chiquito_button"
         android:layout_gravity="center"
         android:layout_margin="8dp"
+        android:contentDescription="@string/fun_activity_button_desc"
+        android:src="@drawable/chiquito_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="60dp" />
 
     <TextView
 
-        android:layout_margin="8dp"
         android:id="@+id/fun_activity_quote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:minHeight="300dp"/>
+        android:layout_margin="8dp"
+        android:minHeight="300dp"
+        android:textAlignment="center" />
 
 
 </LinearLayout>

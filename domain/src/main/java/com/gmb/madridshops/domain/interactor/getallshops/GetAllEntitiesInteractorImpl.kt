@@ -17,7 +17,7 @@ class GetAllEntitiesInteractorImpl(context: Context) : GetAllEntitiesInteractor 
 
     override fun execute(entityType: EntityType, success: SuccessCompletion<Entities>, error: ErrorCompletion) {
 
-        repository.getAllEntities( entityType.name, success = {
+        repository.getAllEntities(entityType.name, success = {
             val entities: Entities = Mapper().entitiesMapper(it, entityType)
             success.successCompletion(entities)
         }, error = {

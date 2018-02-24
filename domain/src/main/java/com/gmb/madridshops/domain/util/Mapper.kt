@@ -1,7 +1,10 @@
 package com.gmb.madridshops.domain.util
 
 import android.util.Log
-import com.gmb.madridshops.domain.model.*
+import com.gmb.madridshops.domain.model.Activity
+import com.gmb.madridshops.domain.model.Entities
+import com.gmb.madridshops.domain.model.Entity
+import com.gmb.madridshops.domain.model.Shop
 import com.gmb.madridshops.repository.model.EntityData
 import java.io.Serializable
 

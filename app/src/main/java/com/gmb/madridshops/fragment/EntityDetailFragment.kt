@@ -35,12 +35,12 @@ class EntityDetailFragment : Fragment() {
 
         entity_detail_name.text = entityDetail.name.toUpperCase()
 
-        when (Locale.getDefault().language){
+        when (Locale.getDefault().language) {
             "es" -> {
                 entity_detail_desc.text = entityDetail.description_es
                 entity_detail_hours.text = entityDetail.openingHours_es
             }
-            else ->  {
+            else -> {
                 entity_detail_desc.text = entityDetail.description_en
                 entity_detail_hours.text = entityDetail.openingHours_en
             }

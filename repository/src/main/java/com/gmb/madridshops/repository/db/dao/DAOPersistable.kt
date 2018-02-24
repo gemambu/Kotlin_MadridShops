@@ -22,7 +22,8 @@ interface DAOWirteOps<T> {
      * deletes the element with id from DB. It must start in 1
      */
     fun delete(id: Long): Long
+
     fun deleteAll(): Boolean
 }
 
-interface DAOPersistable<T>: DAOReadOps<T>, DAOWirteOps<T>
+interface DAOPersistable<T> : DAOReadOps<T>, DAOWirteOps<T>

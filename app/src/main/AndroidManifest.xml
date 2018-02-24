@@ -57,8 +57,9 @@
         <activity
             android:name=".activity.EntityDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.FunActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".activity.FunActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

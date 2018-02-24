@@ -10,7 +10,7 @@ import com.gmb.madridshops.repository.ErrorCompletion
 import com.gmb.madridshops.repository.SuccessCompletion
 import java.lang.ref.WeakReference
 
-internal class GetJsonManagerVolleyImpl(context: Context): GetJsonManager {
+internal class GetJsonManagerVolleyImpl(context: Context) : GetJsonManager {
 
     // hacemos referencia debil
     private var weakContext: WeakReference<Context> = WeakReference(context)

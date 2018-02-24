@@ -22,7 +22,7 @@ class GetAllShopsInteractorFakeImpl : GetAllEntitiesInteractor {
         }
     }
 
-    fun execute(success: SuccessClosure, error: ErrorClosure){
+    fun execute(success: SuccessClosure, error: ErrorClosure) {
         val allOk = false
 
         // connect to the repo
@@ -39,7 +39,7 @@ class GetAllShopsInteractorFakeImpl : GetAllEntitiesInteractor {
 
         val list = ArrayList<Entity>()
 
-        (0..100).mapTo(list) { Shop(it, "Shop $it", "Address: $it", "desc_es", "desc_en", 40.456f, -3.567f,"", "", "", "" ,EntityType.SHOP) }
+        (0..100).mapTo(list) { Shop(it, "Shop $it", "Address: $it", "desc_es", "desc_en", 40.456f, -3.567f, "", "", "", "", EntityType.SHOP) }
 
         return Entities(ArrayList())
     }

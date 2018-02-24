@@ -16,7 +16,7 @@ android {
     }
 
     buildTypes {
-        debug{
+        debug {
             buildConfigField "String", "MADRID_SHOPS_SERVER_URL", "\"http://madrid-shops.com/json_new/getShops.php\""
             buildConfigField "String", "MADRID_ACTIVITIES_SERVER_URL", "\"http://madrid-shops.com/json_new/getActivities.php\""
         }
@@ -27,7 +27,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 
 
 }

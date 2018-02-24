@@ -19,7 +19,7 @@ internal class CacheImplementation(context: Context) : Cache {
         Thread(Runnable {
             val entityList = EntityDAO(dbHelper).query(type)
 
-            if (entityList.isNotEmpty()){
+            if (entityList.isNotEmpty()) {
                 //dbHelper.close()
                 success(entityList)
             } else {
@@ -42,7 +42,7 @@ internal class CacheImplementation(context: Context) : Cache {
                 })
             } catch (ex: Exception) {
                 DispatchOnMainThread(Runnable {
-                  error("Error inserting entities: " + ex.message.toString())
+                    error("Error inserting entities: " + ex.message.toString())
                     dbHelper.close()
                 })
             }

@@ -4,9 +4,7 @@ import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -31,12 +29,7 @@ import com.gmb.madridshops.util.*
 import com.gmb.madridshops.util.map.MapUtil
 import com.gmb.madridshops.util.map.model.EntityPin
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 
 class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
