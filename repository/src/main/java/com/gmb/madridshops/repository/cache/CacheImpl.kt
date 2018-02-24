@@ -11,8 +11,28 @@ import java.lang.ref.WeakReference
 
 internal class CacheImplementation(context: Context) : Cache {
 
+
     private val context = WeakReference<Context>(context)
     private val dbHelper = cacheDBHelper()
+
+    /*  override fun countEntities(success: (total: Int) -> Unit, error: (errorMessage: String) -> Unit) {
+          Thread(Runnable {
+              val total = EntityDAO(dbHelper).count()
+
+              success(total)
+
+              dbHelper.close()
+          }).run()
+      }
+  */
+
+    override fun countEntities(): Int {
+
+        val total = EntityDAO(dbHelper).count()
+        dbHelper.close()
+        return total
+
+    }
 
     override fun getAllEntities(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
@@ -20,7 +40,6 @@ internal class CacheImplementation(context: Context) : Cache {
             val entityList = EntityDAO(dbHelper).query(type)
 
             if (entityList.isNotEmpty()) {
-                //dbHelper.close()
                 success(entityList)
             } else {
                 //dbHelper.close()
@@ -55,11 +74,8 @@ internal class CacheImplementation(context: Context) : Cache {
 
             DispatchOnMainThread(Runnable {
                 if (successDeleting) {
-                    //dbHelper.close()
                     success()
-
                 } else {
-                    //dbHelper.close()
                     error("Error deleting")
                 }
                 dbHelper.close()

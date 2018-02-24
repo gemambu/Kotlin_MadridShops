@@ -15,9 +15,23 @@ import java.lang.ref.WeakReference
 class RepositoryImplementation(context: Context) : Repository {
 
 
+
     private val weakContext = WeakReference<Context>(context)
     private val cache: Cache = CacheImplementation(weakContext.get()!!)
 
+    /*
+    override fun countEntities(success: (total: Int) -> Unit, error: (errorMessage: String) -> Unit) {
+       cache.countEntities(success = {
+
+           Log.d("Holi", "¿Qué hago aquiii?")
+          }, error = {
+           Log.d("Holi", "¿Qué hago aquiii? pero con ERROR")
+       })
+    }*/
+
+    override fun countEntities(): Int {
+        return cache.countEntities()
+    }
 
     override fun getAllEntities(type: String, success: (entities: List<EntityData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
@@ -28,9 +42,9 @@ class RepositoryImplementation(context: Context) : Repository {
                         // if there are entities in the cache, return them
                         success(it)
                     }, error = {
-                // if no shops in cache --> network
-                populateCache(type, success, error)
-            })
+                        // if no shops in cache --> network
+                        populateCache(type, success, error)
+                    })
         }, error = { Log.d("ERROR", "error borrando datos")})
 
 

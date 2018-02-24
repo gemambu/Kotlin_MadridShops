@@ -10,6 +10,7 @@ import com.gmb.madridshops.repository.model.EntityData
 
 class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
 
+
     private val dbReadOnlyConn: SQLiteDatabase = dbHelper.readableDatabase
     private val dbReadWriteOnlyConn: SQLiteDatabase = dbHelper.writableDatabase
 
@@ -40,6 +41,14 @@ class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
         return entityFromCursor(cursor)!!
     }
 
+    override fun count(): Int {
+        val cursor = dbReadOnlyConn.rawQuery("SELECT COUNT(*) FROM ENTITY", null)
+
+        cursor.moveToFirst()
+
+        return cursor.getInt(0)
+    }
+
     override fun query(): List<EntityData> {
         val result = ArrayList<EntityData>()
 
@@ -56,7 +65,6 @@ class EntityDAO(dbHelper: DBHelper) : DAOPersistable<EntityData> {
             result.add(entity)
 
         }
-
 
         return result
     }

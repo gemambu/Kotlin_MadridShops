@@ -12,6 +12,7 @@ import android.view.View
 import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
+import com.gmb.madridshops.domain.interactor.checkentities.CheckEntitiesImpl
 import com.gmb.madridshops.domain.interactor.getallshops.GetAllEntitiesInteractorImpl
 import com.gmb.madridshops.domain.model.Entities
 import com.gmb.madridshops.domain.util.EntityType
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private var context: Context = this
     private var mDetector: GestureDetectorCompat? = null
+    private var firstLoadCompleted = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +53,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        checkFirstLoad()
+
+        if(!firstLoadCompleted && !checkPreferences(this)) {
+            checkFirstLoad()
+        }
+
     }
 
     private fun checkFirstLoad() {
@@ -63,9 +69,11 @@ class MainActivity : AppCompatActivity() {
             alertDialog.setTitle("ERROR!")
             alertDialog.setMessage("There is no connection and no data!")
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Try again", { dialogInterface, i ->
+                dialogInterface.cancel()
                 checkFirstLoad()
             })
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Fun Time!", { dialogInterface, i ->
+                dialogInterface.cancel()
                 Router().navigateFromMainActivityToFunActivity(this)
             })
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Close App", { dialogInterface, i ->
@@ -80,6 +88,53 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initializeData(){
+
+        val checkEntities = CheckEntitiesImpl(this)
+        var total = checkEntities.execute()
+
+        if (total < 1){
+            firstLoadCompleted = true
+            val allShopsInteractor = GetAllEntitiesInteractorImpl(this)
+
+            allShopsInteractor.execute(EntityType.SHOP,
+                    success = object : SuccessCompletion<Entities> {
+                        override fun successCompletion(e: Entities) {
+                            Log.d(SUCCESS, "Shops count: " + e.count())
+                            activitiesInteractor(context)
+                        }
+
+                    }, error = object : ErrorCompletion {
+                override fun errorCompletion(errorMessage: String) {
+                    Log.d(ERROR, errorMessage)
+                }
+            })
+        }
+
+    }
+
+    private fun activitiesInteractor(context: Context) {
+        val allActivitiesInteractor = GetAllEntitiesInteractorImpl(this)
+        allActivitiesInteractor.execute(EntityType.ACTIVITY,
+                success = object : SuccessCompletion<Entities> {
+                    override fun successCompletion(e: Entities) {
+                        Log.d(SUCCESS, "Activities count: " + e.count())
+
+                        updatePreferences(context)
+                        manageActivityComponents(true)
+
+
+                    }
+
+                }, error = object : ErrorCompletion {
+            override fun errorCompletion(errorMessage: String) {
+                Log.d(ERROR, errorMessage)
+            }
+        })
+    }
+
+    /** First option **/
+    /*
     private fun initializeData() {
 
         val allShopsInteractor = GetAllEntitiesInteractorImpl(this)
@@ -98,24 +153,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun activitiesInteractor(context: Context) {
-        val allActivitiesInteractor = GetAllEntitiesInteractorImpl(this)
-        allActivitiesInteractor.execute(EntityType.ACTIVITY,
-                success = object : SuccessCompletion<Entities> {
-                    override fun successCompletion(e: Entities) {
-                        Log.d(SUCCESS, "Activities count: " + e.count())
 
-                        updatePreferences(context)
-                        manageActivityComponents(true)
-
-                    }
-
-                }, error = object : ErrorCompletion {
-            override fun errorCompletion(errorMessage: String) {
-                Log.d(ERROR, errorMessage)
-            }
-        })
-    }
+    }*/
 
     /******* Auxiliar methods to manage the view: progress bar, buttons... *******/
 

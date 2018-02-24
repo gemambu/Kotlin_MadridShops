@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.gmb.madridshops.R
+import com.gmb.madridshops.adapter.InfoWindowAdapter
 import com.gmb.madridshops.adapter.RecyclerViewAdapter
 import com.gmb.madridshops.domain.interactor.ErrorCompletion
 import com.gmb.madridshops.domain.interactor.SuccessCompletion
@@ -110,21 +111,24 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     }
 
     private fun initializeMap(entities: Entities) {
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
 
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.activity_main_map_fragment) as SupportMapFragment
 
         mapFragment.getMapAsync({
             Log.d(SUCCESS, getString(R.string.loaded_map_correctly))
 
             MapUtil().centerMapInPosition(it, DEFAULT_MADRID_LATIDUDE, DEFAULT_MADRID_LONGITUDE)
+
+            map = it
+
             it.uiSettings.isRotateGesturesEnabled = false
             it.uiSettings.isZoomControlsEnabled = true
-            it.snapshot { }
+
             showUserPosition(baseContext, it)
-            map = it
 
             addAllPins(entities)
 
+            it.setInfoWindowAdapter(InfoWindowAdapter(this))
         })
 
 

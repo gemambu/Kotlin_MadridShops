@@ -37,7 +37,6 @@ class RecyclerViewAdapter(private var listData: List<Entity>?, private val liste
         private val address = itemView.findViewById<TextView>(R.id.address)
         private val logo = itemView.findViewById<ImageView>(R.id.logo)
 
-
         fun bindEntity(entity: Entity, position: Int) {
 
             // actualizamos la vista (itemView, que es la tarjeta) con el modelo

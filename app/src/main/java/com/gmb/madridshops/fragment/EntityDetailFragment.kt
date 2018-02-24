@@ -26,7 +26,6 @@ class EntityDetailFragment : Fragment() {
 
     private fun loadEntityData() {
 
-        //val url = "https://maps.googleapis.com/maps/api/staticmap?center=${entityDetail.latitude},${entityDetail.longitude}&maptype=roadmap&format=png&zoom=17&size=320x220&scale=2&markers=%7Ccolor:0x9C7B14%7C${entityDetail.latitude},${entityDetail.longitude}"
         val url = getGoogleMapUrl(entityDetail.latitude, entityDetail.longitude)
         Picasso.with(root.context)
                 .load(url)

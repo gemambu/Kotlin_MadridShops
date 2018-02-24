@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    tools:context=".adapter.InfoWindowAdapter">
+
+    <ImageView
+        android:id="@+id/info_window_image"
+        android:contentDescription="@string/logo_for_the_entity"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:id="@+id/info_window_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/info_window_image"
+        android:layout_alignParentTop="true"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        tools:text="CELL TITLE"/>
+
+    <TextView
+        android:id="@+id/info_window_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/info_window_image"
+        android:layout_below="@id/info_window_title"
+        android:maxLines="2"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingTop="5dp"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        android:textColor="@android:color/darker_gray"
+        tools:text="CELL SUBTITLE"/>
+
+</RelativeLayout>

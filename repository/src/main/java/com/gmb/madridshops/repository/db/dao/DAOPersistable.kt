@@ -7,6 +7,7 @@ interface DAOReadOps<T> {
     fun query(): List<T>
     fun query(type: String): List<T>
     fun queryCursor(id: Long): Cursor
+    fun count(): Int
 }
 
 interface DAOWirteOps<T> {
