@@ -17,4 +17,9 @@
     <string name="logo_for_the_entity">Logo para la entidad</string>
     <string name="tool_text_desc">Lorem fistrum ese hombree te va a hasé pupitaa torpedo papaar papaar te voy a borrar el cerito te voy a borrar el cerito ese que llega caballo blanco caballo negroorl papaar papaar. Jarl al ataquerl no puedor diodeno qué dise usteer tiene musho peligro al ataquerl. Amatomaa al ataquerl quietooor a wan.</string>
     <string name="tool_text_address">A gramenawer sexuarl papaar papaar</string>
+    <string name="no_network_title">Error!</string>
+    <string name="no_network_description">No hay conexión y no hay datos almacenados!</string>
+    <string name="no_network_try_again">Reintentar</string>
+    <string name="no_network_fun_time">Quietor!</string>
+    <string name="no_network_close_app">Cerrar</string>
 </resources>

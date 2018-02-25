@@ -19,4 +19,9 @@
     <string name="tool_text_desc">Lorem fistrum ese hombree te va a hasé pupitaa torpedo papaar papaar te voy a borrar el cerito te voy a borrar el cerito ese que llega caballo blanco caballo negroorl papaar papaar. Jarl al ataquerl no puedor diodeno qué dise usteer tiene musho peligro al ataquerl. Amatomaa al ataquerl quietooor a wan.</string>
     <string name="tool_text_hours">istro te va a hasé pupitaa a wan no puedor por la gloria de mi madre torpedo se calle ustée fistro se calle ustée. Benemeritaar se calle ustée ese hombree por la gloria de mi madre amatomaa al ataquerl.</string>
     <string name="tool_text_address">A gramenawer sexuarl papaar papaar</string>
+    <string name="no_network_title">Error!</string>
+    <string name="no_network_description">There is no connection and no saved data!</string>
+    <string name="no_network_try_again">Try again</string>
+    <string name="no_network_fun_time">Fun Time!</string>
+    <string name="no_network_close_app">Close App</string>
 </resources>

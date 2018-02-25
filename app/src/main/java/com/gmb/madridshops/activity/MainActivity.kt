@@ -68,17 +68,17 @@ class MainActivity : AppCompatActivity() {
             // show no connection message
             val alertDialog = AlertDialog.Builder(this@MainActivity).create()
 
-            alertDialog.setTitle("ERROR!")
-            alertDialog.setMessage("There is no connection and no data!")
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Try again", { dialogInterface, _ ->
+            alertDialog.setTitle(getString(R.string.no_network_title))
+            alertDialog.setMessage(getString(R.string.no_network_description))
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.no_network_try_again), { dialogInterface, _ ->
                 dialogInterface.cancel()
                 checkFirstLoad()
             })
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Fun Time!", { dialogInterface, _ ->
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.no_network_fun_time), { dialogInterface, _ ->
                 dialogInterface.cancel()
                 Router().navigateFromMainActivityToFunActivity(this)
             })
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Close App", { _, _ ->
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_network_close_app), { _, _ ->
                 finish()
                 System.exit(0)
             })
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     private fun initializeData(){
 
         val checkEntities = CheckEntitiesImpl(this)
-        var total = checkEntities.execute()
+        val total = checkEntities.execute()
 
         if (total < 1){
             downloadInformation(context)
