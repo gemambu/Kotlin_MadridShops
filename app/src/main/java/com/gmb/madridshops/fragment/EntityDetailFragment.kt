@@ -2,6 +2,7 @@ package com.gmb.madridshops.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +32,7 @@ class EntityDetailFragment : Fragment() {
                 .placeholder(R.drawable.google_maps)
                 .into(entity_detail_map)
 
-        entity_detail_name.text = entityDetail.name.toUpperCase()
+        //entity_detail_name.text = entityDetail.name.toUpperCase()
 
         when (Locale.getDefault().language) {
             "es" -> {
@@ -44,6 +45,9 @@ class EntityDetailFragment : Fragment() {
             }
 
         }
+
+        entity_detail_desc.movementMethod = ScrollingMovementMethod();
+        entity_detail_hours.movementMethod = ScrollingMovementMethod();
 
         entity_detail_address.text = entityDetail.address
     }

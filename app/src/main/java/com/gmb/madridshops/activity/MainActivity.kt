@@ -70,15 +70,15 @@ class MainActivity : AppCompatActivity() {
 
             alertDialog.setTitle("ERROR!")
             alertDialog.setMessage("There is no connection and no data!")
-            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Try again", { dialogInterface, i ->
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Try again", { dialogInterface, _ ->
                 dialogInterface.cancel()
                 checkFirstLoad()
             })
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Fun Time!", { dialogInterface, i ->
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Fun Time!", { dialogInterface, _ ->
                 dialogInterface.cancel()
                 Router().navigateFromMainActivityToFunActivity(this)
             })
-            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Close App", { dialogInterface, i ->
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Close App", { _, _ ->
                 finish()
                 System.exit(0)
             })

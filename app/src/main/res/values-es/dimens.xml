@@ -4,4 +4,11 @@
     <dimen name="default_margin">8dp</dimen>
     <dimen name="main_button_dimension_to_top">200dp</dimen>
     <dimen name="margin_16">16dp</dimen>
+    <dimen name="pin_image_width">60dp</dimen>
+    <dimen name="pin_text_size">15sp</dimen>
+    <dimen name="pin_text_size_desc">10sp</dimen>
+    <dimen name="cell_height">22dp</dimen>
+    <dimen name="cell_mas_height">90dp</dimen>
+    <dimen name="cell_max_width">190dp</dimen>
+    <dimen name="cell_image_size">50dp</dimen>
 </resources>

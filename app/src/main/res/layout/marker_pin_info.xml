@@ -10,8 +10,8 @@
     <ImageView
         android:id="@+id/info_window_image"
         android:contentDescription="@string/logo_for_the_entity"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/pin_image_width"
+        android:layout_height="@dimen/pin_image_width"
         android:scaleType="centerCrop"
         tools:src="@drawable/ic_launcher_background"/>
 
@@ -21,12 +21,12 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/info_window_image"
         android:layout_alignParentTop="true"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:textSize="15sp"
+        android:paddingStart="@dimen/pin_padding"
+        android:paddingEnd="@dimen/pin_padding"
+        android:textSize="@dimen/pin_text_size"
         android:textStyle="bold"
         android:textColor="@android:color/black"
-        tools:text="CELL TITLE"/>
+        tools:text="ENTITY NAME"/>
 
     <TextView
         android:id="@+id/info_window_subtitle"
@@ -35,12 +35,12 @@
         android:layout_toEndOf="@id/info_window_image"
         android:layout_below="@id/info_window_title"
         android:maxLines="2"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:paddingTop="5dp"
-        android:textSize="10sp"
+        android:paddingStart="@dimen/pin_padding"
+        android:paddingEnd="@dimen/pin_padding"
+        android:paddingTop="@dimen/pin_padding"
+        android:textSize="@dimen/pin_text_size_desc"
         android:textStyle="italic"
         android:textColor="@android:color/darker_gray"
-        tools:text="CELL SUBTITLE"/>
+        tools:text="ENTITY DESC ENTITY DESC"/>
 
 </RelativeLayout>

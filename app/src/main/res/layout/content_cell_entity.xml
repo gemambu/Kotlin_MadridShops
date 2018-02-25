@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="@dimen/cell_height"
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="@dimen/cell_height"
             android:layout_alignBottom="@+id/name"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="@dimen/default_margin"
@@ -43,8 +43,8 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/cell_image_size"
+            android:layout_height="@dimen/cell_image_size"
             android:layout_alignParentStart="true"
             android:layout_below="@id/name"
             android:layout_marginBottom="@dimen/default_margin"
@@ -52,8 +52,8 @@
             android:layout_marginTop="@dimen/default_margin"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_entity_logo"
-            android:maxHeight="90dp"
-            android:maxWidth="190dp"
+            android:maxHeight="@dimen/cell_mas_height"
+            android:maxWidth="@dimen/cell_max_width"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

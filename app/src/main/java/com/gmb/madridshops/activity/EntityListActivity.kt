@@ -75,11 +75,6 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     private fun setupData() {
 
         val getAllEntitiesInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
@@ -175,11 +170,12 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     }
 
 
+    /*
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
-    }
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

@@ -12,8 +12,11 @@
     <string name="list_entity_activities">Activities list</string>
     <string name="error_loading_list">Error loading</string>
     <string name="loaded_map_correctly">Map loaded correctly!</string>
-    <string name="fun_activity_description">A little culture of the Pradera while you get a connection to the network to download the information. Click on the image, cobarder!</string>
+    <string name="fun_activity_description">A little culture of the Pradera. Click on the image, cobarder!</string>
     <string name="fun_time_title">Fun time!</string>
     <string name="fun_activity_button_desc">Fun button</string>
     <string name="logo_for_the_entity">Logo for the entity</string>
+    <string name="tool_text_desc">Lorem fistrum ese hombree te va a hasé pupitaa torpedo papaar papaar te voy a borrar el cerito te voy a borrar el cerito ese que llega caballo blanco caballo negroorl papaar papaar. Jarl al ataquerl no puedor diodeno qué dise usteer tiene musho peligro al ataquerl. Amatomaa al ataquerl quietooor a wan.</string>
+    <string name="tool_text_hours">istro te va a hasé pupitaa a wan no puedor por la gloria de mi madre torpedo se calle ustée fistro se calle ustée. Benemeritaar se calle ustée ese hombree por la gloria de mi madre amatomaa al ataquerl.</string>
+    <string name="tool_text_address">A gramenawer sexuarl papaar papaar</string>
 </resources>

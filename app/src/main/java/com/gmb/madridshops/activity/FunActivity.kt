@@ -16,13 +16,7 @@ class FunActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fun)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val title = findViewById<TextView>(R.id.toolbar_title)
-        setSupportActionBar(toolbar)
-
-        title.text = getString(R.string.fun_time_title)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        displayToolbar()
 
         fun_activity_description.text = getString(R.string.fun_activity_description)
 
@@ -30,6 +24,16 @@ class FunActivity : AppCompatActivity() {
             val random = Random().nextInt(quotes.size)
             fun_activity_quote.text = quotes[random]
         }
+    }
+
+    private fun displayToolbar(){
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val title = findViewById<TextView>(R.id.toolbar_title)
+        setSupportActionBar(toolbar)
+
+        title.text = getString(R.string.fun_time_title)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

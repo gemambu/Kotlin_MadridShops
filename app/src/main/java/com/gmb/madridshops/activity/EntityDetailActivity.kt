@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.widget.TextView
 import com.gmb.madridshops.R
 import com.gmb.madridshops.domain.model.Entity
 import com.gmb.madridshops.fragment.EntityDetailFragment
@@ -28,9 +29,11 @@ class EntityDetailActivity : AppCompatActivity() {
 
     private fun displayToolbar(entity: Entity) {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val title = findViewById<TextView>(R.id.toolbar_title)
         setSupportActionBar(toolbar)
 
-        supportActionBar?.title = entity.name
+        title.text = entity.name
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
