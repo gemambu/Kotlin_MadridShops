@@ -31,6 +31,12 @@ class RecyclerViewAdapter(private var listData: List<Entity>?, private val liste
 
     override fun getItemCount() = listData?.size ?: 0
 
+    fun getEntityWithId(idSearch: Int): Int {
+
+        val entity = listData!!.filter { it.id == idSearch }.single()
+        return listData!!.indexOf(entity)
+    }
+
     inner class EntityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val name = itemView.findViewById<TextView>(R.id.name)
@@ -55,7 +61,6 @@ class RecyclerViewAdapter(private var listData: List<Entity>?, private val liste
         }
 
     }
-
 
     interface OnEntityClickListener {
         fun onEntityClicked(position: Int, entity: Entity, view: View)

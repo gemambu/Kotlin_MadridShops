@@ -9,7 +9,6 @@ import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -35,7 +34,7 @@ import com.google.android.gms.maps.SupportMapFragment
 
 class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClickListener {
 
-    private lateinit var containerListFragment: EntityListFragment
+    lateinit var containerListFragment: EntityListFragment
 
     private var map: GoogleMap? = null
     private var list: Entities? = null
@@ -78,7 +77,6 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     private fun setupData() {
 
         val getAllEntitiesInteractor: GetAllEntitiesInteractor = GetAllEntitiesInteractorImpl(this)
-
         getAllEntitiesInteractor.execute(entityType, object : SuccessCompletion<Entities> {
 
             override fun successCompletion(e: Entities) {
@@ -102,7 +100,6 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
 
     private fun setupList() {
         containerListFragment = supportFragmentManager.findFragmentById(R.id.activity_main_list_fragment) as EntityListFragment
-
         containerListFragment.setEntities(list!!.entities)
     }
 
@@ -125,13 +122,27 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
             addAllPins(entities)
 
             it.setInfoWindowAdapter(InfoWindowAdapter(this))
-            it.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener {
+            it.setOnInfoWindowClickListener({
                 val entity: Entity = it.tag as Entity
                 Router().navigateFromListActivityToDetailActivity(this, entity)
+
+            })
+
+            it.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener {
+                override fun onMarkerClick(marker: com.google.android.gms.maps.model.Marker?): Boolean {
+
+                    if (marker != null ){
+
+                        val markerId = marker.snippet.toInt()
+                        Log.d(APP, "Clicked on if: $markerId")
+                        containerListFragment.displaySelectedItem(markerId)
+                        return false
+                    }
+
+                    return true
+                }
             })
         })
-
-
     }
 
     private fun showUserPosition(context: Context, map: GoogleMap?) {
@@ -145,9 +156,7 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
                     10)
             return
         }
-
         map?.isMyLocationEnabled = true
-
 
     }
 
@@ -165,17 +174,8 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     private fun addAllPins(entities: Entities) {
 
         val pins = EntityPin.entityPins(entities)
-
         MapUtil().addPins(pins, map, this)
     }
-
-
-    /*
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -189,6 +189,5 @@ class EntityListActivity : AppCompatActivity(), RecyclerViewAdapter.OnEntityClic
     override fun onEntityClicked(position: Int, entity: Entity, view: View) {
         Router().navigateFromListActivityToDetailActivity(this, entity)
     }
-
 
 }

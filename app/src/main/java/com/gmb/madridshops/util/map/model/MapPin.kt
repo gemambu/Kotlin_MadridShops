@@ -21,6 +21,9 @@ class EntityPin(override val relatedModelObject: Entity) : MapPinneable<Entity> 
     override val name: String
         get() = relatedModelObject.name
 
+    override val id: Int
+        get() = relatedModelObject.id
+
     companion object {
 
         fun entityPins(entities: Entities): List<MapPinneable<Entity>> {

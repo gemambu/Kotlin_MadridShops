@@ -3,6 +3,7 @@ package com.gmb.madridshops.util.map
 import android.content.Context
 import android.util.Log
 import com.gmb.madridshops.R
+import com.gmb.madridshops.activity.EntityListActivity
 import com.gmb.madridshops.domain.model.Entity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -38,11 +39,10 @@ class MapUtil {
             } else {
                 val position = LatLng(pinnable.latitude.toDouble(), pinnable.longitude.toDouble())
                 val icon = BitmapDescriptorFactory.fromResource(R.drawable.pin)
-                val marker = MarkerOptions().position(position).title(pinnable.pinDescription).icon(icon)
+                val marker = MarkerOptions().position(position).title(pinnable.pinDescription).icon(icon).snippet(pinnable.id.toString())
                 val m = googleMap.addMarker(marker)
                 m.tag = pinnable.relatedModelObject
             }
-
         }
     }
 

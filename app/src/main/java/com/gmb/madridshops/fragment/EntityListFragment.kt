@@ -35,7 +35,6 @@ class EntityListFragment : Fragment() {
 
     }
 
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -49,6 +48,12 @@ class EntityListFragment : Fragment() {
 
         return root
 
+    }
+
+    fun displaySelectedItem(id: Int){
+
+        val position = if (adapter!!.getEntityWithId(id) != null) adapter!!.getEntityWithId(id) else 0
+        entityListRecyclerView.layoutManager.scrollToPosition(position)
     }
 
     override fun onAttach(context: Context?) {
