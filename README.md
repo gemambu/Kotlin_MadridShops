@@ -88,7 +88,15 @@ It is also decided to unify and rename the table in database to ENTITY, adding o
 - [ ] Expand the model to enter the information of Services in Madrid.
 - [ ] Add master-detail on tablets or devices with a minimum screen width
 
+## DEMOS
 
+### Message with no connection
+
+<img src= "./app/src/main/res/demo/no_network_EN.png" width="250px">
+
+### Application
+
+<img src= "./app/src/main/res/demo/madrid_shops_demo_EN.gif" width="250px">
 
 # Madrid Shops. V KC Bootcamp. Práctica Android Avanzado with Kotlin
 
@@ -189,7 +197,7 @@ También se decide unificar y renombrar la tabla en base de datos a ENTITY, aña
 
 <img src= "./app/src/main/res/demo/no_network_ES.png" width="250px">
 
-### Uso de la App
+### Aplicación
 
-<img src= "./app/src/main/res/demo/madrid_shops_demo.gif" width="250px">
+<img src= "./app/src/main/res/demo/madrid_shops_demo_ES.gif" width="250px">
 
